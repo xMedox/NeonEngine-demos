@@ -12,9 +12,11 @@ import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.rendering.Attenuation;
 import net.medox.neonengine.rendering.DirectionalLight;
+import net.medox.neonengine.rendering.Font;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
 import net.medox.neonengine.rendering.PointLight;
+import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Skybox;
 import net.medox.neonengine.rendering.SpotLight;
 import net.medox.neonengine.rendering.Texture;
@@ -28,6 +30,8 @@ public class TestGame extends Game{
 	
 	@Override
 	public void init(){
+		RenderingEngine.setMainFont(new Font("font.ttf", false));
+		
 //		RenderingEngine.setSkybox(new Skybox("left.png", "back.png", "right.png", "front.png", "top.png", "bottom.png"));
 //		RenderingEngine.useSkybox(true);
 		

@@ -5,10 +5,14 @@ import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;
 import net.medox.neonengine.rendering.Camera;
+import net.medox.neonengine.rendering.Font;
+import net.medox.neonengine.rendering.RenderingEngine;
 
 public class Sandbox2D extends Game{
 	@Override
 	public void init(){
+		RenderingEngine.setMainFont(new Font("font.ttf", false));
+		
 		addEntity(new Entity().addComponent(new Camera(0, 0, 0)).addComponent(new ScreenshotTaker()));
 		
 //		Entity2D player = new Entity2D();

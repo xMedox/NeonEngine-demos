@@ -10,12 +10,16 @@ import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;
 import net.medox.neonengine.math.Vector2f;
 import net.medox.neonengine.rendering.Camera;
+import net.medox.neonengine.rendering.Font;
+import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Texture;
 import net.medox.neonengine.rendering.Window;
 
 public class TestGame extends Game{
 	@Override
 	public void init(){
+		RenderingEngine.setMainFont(new Font("font.ttf", false));
+		
 		Entity player = new Entity();
 				
 		player.addComponent(new Camera((float)Math.toRadians(65.0f), 0.01f, 1000.0f));
