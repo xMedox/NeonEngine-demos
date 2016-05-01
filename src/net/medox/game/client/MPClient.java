@@ -60,7 +60,7 @@ public class MPClient{
 		Window.setStartDimensions(854, 480);
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
-		Window.setStartIcon("./res/icon_16.png", "./res/icon_32.png");
+		Window.setStartIcon("icon_16.png", "icon_32.png");
 		Window.setStartCursor("cursor.png", 0, 0);
 		
 //		Log.info("Please enter your Username");
