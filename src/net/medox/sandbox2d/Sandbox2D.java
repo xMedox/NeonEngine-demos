@@ -11,7 +11,7 @@ import net.medox.neonengine.rendering.RenderingEngine;
 public class Sandbox2D extends Game{
 	@Override
 	public void init(){
-		RenderingEngine.setMainFont(new Font("font.ttf", false));
+		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
 		
 		addEntity(new Entity().addComponent(new Camera(0, 0, 0)).addComponent(new ScreenshotTaker()));
 		

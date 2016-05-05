@@ -12,13 +12,15 @@ import net.medox.neonengine.math.Vector2f;
 import net.medox.neonengine.rendering.Camera;
 import net.medox.neonengine.rendering.Font;
 import net.medox.neonengine.rendering.RenderingEngine;
+import net.medox.neonengine.rendering.Skybox;
 import net.medox.neonengine.rendering.Texture;
 import net.medox.neonengine.rendering.Window;
 
 public class TestGame extends Game{
 	@Override
 	public void init(){
-		RenderingEngine.setMainFont(new Font("font.ttf", false));
+		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
+		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
 		Entity player = new Entity();
 				

@@ -21,11 +21,8 @@ import net.medox.neonengine.rendering.Texture;
 public class TestGame extends Game{
 	@Override
 	public void init(){
-		RenderingEngine.setMainFont(new Font("font.ttf", false));
-		
-		Entity skybox = new Entity();
-		skybox.addComponent(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
-		addEntity(skybox);
+		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
+		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
 		Entity changeMode = new Entity();
 		changeMode.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker()).addComponent(new ChangeMode());
