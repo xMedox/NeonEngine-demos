@@ -2,6 +2,7 @@ package net.medox.propeditor;
 
 import net.medox.neonengine.components.FreeLook;
 import net.medox.neonengine.components.FreeMove;
+import net.medox.neonengine.components.FullscreenSetter;
 import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Game;
@@ -20,7 +21,7 @@ public class TestGame extends Game{
 		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
 		Entity changeMode = new Entity();
-		changeMode/*.addComponent(new FullscreenSetter())*/.addComponent(new ScreenshotTaker()).addComponent(new ChangeMode());
+		changeMode.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker()).addComponent(new ChangeMode());
 		addEntity(changeMode);
 		
 		Entity camera = new Entity();
