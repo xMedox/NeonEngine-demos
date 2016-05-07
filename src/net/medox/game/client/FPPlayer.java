@@ -104,8 +104,7 @@ public class FPPlayer extends Entity{
 			}
 			
 			if(rotX){
-//				x = (float) Math.toRadians(-deltaPos.getY() * sensitivity);
-				x = (float) Math.toRadians(deltaPos.getY() * sensitivity);
+				x = (float) Math.toRadians(-deltaPos.getY() * sensitivity);
 				getTransform().rotate(getTransform().getRot().getRight(), x);
 			}else{
 				x = 0;
