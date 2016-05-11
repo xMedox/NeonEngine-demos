@@ -96,7 +96,7 @@ public class TestGame extends Game{
 			Entity sword = new Entity();
 			Material swordM = new Material();
 			swordM.setDiffuseMap(new Texture("redSword.png", true));
-			swordM.setGlowMap(new Texture("block60_glow.png", true));
+			swordM.setEmissiveMap(new Texture("block60_glow.png", true));
 			sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordM));
 			sword.getTransform().setScale(0.5f);
 			sword.getTransform().setPos(0.75f, 0, 1.25f);
@@ -112,7 +112,7 @@ public class TestGame extends Game{
 			Entity sword = new Entity();
 			Material swordM = new Material();
 			swordM.setDiffuseMap(new Texture("blueSword.png", true));
-			swordM.setGlowMap(new Texture("block60_glow.png", true));
+			swordM.setEmissiveMap(new Texture("block60_glow.png", true));
 			sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordM));
 			sword.getTransform().setScale(0.5f);
 			sword.getTransform().setPos(0.75f, 0, 1.25f);
@@ -167,7 +167,7 @@ public class TestGame extends Game{
 		
 		Material material = new Material();
 		material.setDiffuseMap(new Texture("blocks.png", true));
-		material.setGlowMap(new Texture("blocks_glow.png", true));
+		material.setEmissiveMap(new Texture("blocks_glow.png", true));
 		
 		Mesh mesh = new Mesh("blocks.obj");
 		

@@ -29,7 +29,7 @@ public class Block{
 	
 	public void render(){
 		if(id == 0){
-			RenderingEngine.add2DMesh(tranform, Material.DEFAULT_DIFFUSE_TEXTURE);
+			RenderingEngine.add2DMesh(tranform, Material.DEFAULT_DIFFUSE_MAP_TEXTURE);
 		}else if(id == 1){
 			RenderingEngine.add2DMesh(tranform, Material.DEFAULT_SPECULAR_MAP_TEXTURE);
 		}else if(id == 2){

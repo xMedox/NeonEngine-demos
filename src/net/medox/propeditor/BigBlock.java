@@ -51,14 +51,14 @@ public class BigBlock{
 			
 			material40 = new Material();
 			material40.setDiffuseMap(new Texture("block40.png", true));
-			material40.setGlowMap(new Texture("block40_glow.png", true));
+			material40.setEmissiveMap(new Texture("block40_glow.png", true));
 			
 			material50 = new Material();
 			material50.setDiffuseMap(new Texture("block50.png", true));
 			
 			material60 = new Material();
 			material60.setDiffuseMap(new Texture("block60.png", true));
-			material60.setGlowMap(new Texture("block60_glow.png", true));
+			material60.setEmissiveMap(new Texture("block60_glow.png", true));
 			
 			material70 = new Material();
 			material70.setDiffuseMap(new Texture("block70.png", true));
