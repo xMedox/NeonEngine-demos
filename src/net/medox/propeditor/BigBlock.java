@@ -4,6 +4,7 @@ import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.rendering.Camera;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
+import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Shader;
 import net.medox.neonengine.rendering.Texture;
 
@@ -110,80 +111,44 @@ public class BigBlock{
 		if(texture[0] != -1){
 			if(mesh.inFrustum(transform, camera)){
 				if(seleted){
-					shader.bind();
-					shader.updateUniforms(transform, materialS, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
 				}else if(texture[0] == 0 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material00, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material00, camera);
 				}else if(texture[0] == 1 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material10, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material10, camera);
 				}else if(texture[0] == 2 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material20, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material20, camera);
 				}else if(texture[0] == 3 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material30, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material30, camera);
 				}else if(texture[0] == 4 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material40, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material40, camera);
 				}else if(texture[0] == 5 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material50, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material50, camera);
 				}else if(texture[0] == 6 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material60, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material60, camera);
 				}else if(texture[0] == 7 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material70, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material70, camera);
 				}else if(texture[0] == 8 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material80, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material80, camera);
 				}else if(texture[0] == 9 && texture[1] == 0){
-					shader.bind();
-					shader.updateUniforms(transform, material90, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material90, camera);
 				}else if(texture[0] == 0 && texture[1] == 1){
-					shader.bind();
-					shader.updateUniforms(transform, material01, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material01, camera);
 				}else if(texture[0] == 1 && texture[1] == 1){
-					shader.bind();
-					shader.updateUniforms(transform, material11, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material11, camera);
 				}else if(texture[0] == 2 && texture[1] == 1){
-					shader.bind();
-					shader.updateUniforms(transform, material21, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material21, camera);
 				}else if(texture[0] == 3 && texture[1] == 1){
-					shader.bind();
-					shader.updateUniforms(transform, material31, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material31, camera);
 				}else if(texture[0] == 4 && texture[1] == 1){
-					shader.bind();
-					shader.updateUniforms(transform, material41, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material41, camera);
 				}else if(texture[0] == 5 && texture[1] == 1){
-					shader.bind();
-					shader.updateUniforms(transform, material51, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, material51, camera);
 				}
 			}
 		}else if(seleted){
 			if(mesh.inFrustum(transform, camera)){
-				shader.bind();
-				shader.updateUniforms(transform, materialS, camera);
-				mesh.draw();
+				RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
 			}
 		}
 	}

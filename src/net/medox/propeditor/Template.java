@@ -5,6 +5,7 @@ import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.rendering.Camera;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
+import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Shader;
 import net.medox.neonengine.rendering.Texture;
 
@@ -34,9 +35,7 @@ public class Template{
 	public void render(Shader shader, Camera camera){
 		if(visable){
 			if(mesh.inFrustum(transform, camera)){
-				shader.bind();
-				shader.updateUniforms(transform, material, camera);
-				mesh.draw();
+				RenderingEngine.addMesh(shader, transform, mesh, material, camera);
 			}
 		}
 	}

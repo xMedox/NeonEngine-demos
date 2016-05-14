@@ -6,6 +6,7 @@ import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.rendering.Camera;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
+import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Shader;
 import net.medox.neonengine.rendering.Texture;
 
@@ -128,20 +129,14 @@ public class Block{
 		if(texture[0] != -1){
 			if(mesh.inFrustum(transform, camera)){
 				if(seleted){
-					shader.bind();
-					shader.updateUniforms(transform, materialS, camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
 				}else{
-					shader.bind();
-					shader.updateUniforms(transform, materialMap.get((texture[0]+1)+(texture[1]*10)), camera);
-					mesh.draw();
+					RenderingEngine.addMesh(shader, transform, mesh, materialMap.get((texture[0]+1)+(texture[1]*10)), camera);
 				}
 			}
 		}else if(seleted){
 			if(mesh.inFrustum(transform, camera)){
-				shader.bind();
-				shader.updateUniforms(transform, materialS, camera);
-				mesh.draw();
+				RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
 			}
 		}
 	}
