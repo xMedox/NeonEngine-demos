@@ -46,11 +46,11 @@ public class Block{
 	public void render(Shader shader, Camera camera){
 		if(texture[0] != -1){
 			if(mesh.inFrustum(transform, camera)){
-				RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
+				RenderingEngine.renderMesh(shader, transform, mesh, materialS, camera);
 			}
 		}else if(seleted){
 			if(mesh.inFrustum(transform, camera)){
-				RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
+				RenderingEngine.renderMesh(shader, transform, mesh, materialS, camera);
 			}
 		}
 	}

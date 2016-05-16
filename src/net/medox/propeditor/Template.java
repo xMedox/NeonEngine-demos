@@ -35,7 +35,7 @@ public class Template{
 	public void render(Shader shader, Camera camera){
 		if(visable){
 			if(mesh.inFrustum(transform, camera)){
-				RenderingEngine.addMesh(shader, transform, mesh, material, camera);
+				RenderingEngine.renderMesh(shader, transform, mesh, material, camera);
 			}
 		}
 	}

@@ -18,7 +18,7 @@ public class BlockShower extends Entity2DComponent{
 	@Override
 	public void render(){		
 		if(RenderingEngine.mesh2DInFrustum(getTransform())){
-			RenderingEngine.add2DMesh(getTransform(), texture, new Vector3f(1, 1, 1), new Vector2f(world.getSelectedTexture()[0]/10f, world.getSelectedTexture()[1]/10f), new Vector2f((world.getSelectedTexture()[0]+1)/10f, (world.getSelectedTexture()[1]+1)/10f));
+			RenderingEngine.render2DMesh(getTransform(), texture, new Vector3f(1, 1, 1), new Vector2f(world.getSelectedTexture()[0]/10f, world.getSelectedTexture()[1]/10f), new Vector2f((world.getSelectedTexture()[0]+1)/10f, (world.getSelectedTexture()[1]+1)/10f));
 		}
 	}
 }

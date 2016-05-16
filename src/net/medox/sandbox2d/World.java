@@ -75,11 +75,7 @@ public class World extends Entity2DComponent{
 			}
 		}
 		
-		if(RenderingEngine.RENDERING_MODE == RenderingEngine.OPENGL){
-			RenderingEngine.drawString(10, 10, "OpenGL", new Vector3f(1, 1, 1));
-		}else if(RenderingEngine.RENDERING_MODE == RenderingEngine.VULKAN){
-			RenderingEngine.drawString(10, 10, "Vulkan", new Vector3f(1, 1, 1));
-		}
+		RenderingEngine.drawString(10, 10, "OpenGL", new Vector3f(1, 1, 1));
 	}
 	
 	@Override

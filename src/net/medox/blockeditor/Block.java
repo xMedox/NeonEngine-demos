@@ -129,14 +129,14 @@ public class Block{
 		if(texture[0] != -1){
 			if(mesh.inFrustum(transform, camera)){
 				if(seleted){
-					RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
+					RenderingEngine.renderMesh(shader, transform, mesh, materialS, camera);
 				}else{
-					RenderingEngine.addMesh(shader, transform, mesh, materialMap.get((texture[0]+1)+(texture[1]*10)), camera);
+					RenderingEngine.renderMesh(shader, transform, mesh, materialMap.get((texture[0]+1)+(texture[1]*10)), camera);
 				}
 			}
 		}else if(seleted){
 			if(mesh.inFrustum(transform, camera)){
-				RenderingEngine.addMesh(shader, transform, mesh, materialS, camera);
+				RenderingEngine.renderMesh(shader, transform, mesh, materialS, camera);
 			}
 		}
 	}
