@@ -52,8 +52,7 @@ public class Puzzle extends Game{
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("icon16.png", "icon32.png");
-//		Window.setStartCursor("cursor test red.png", 0, 0);
-//		Window.setStartSizeLimits(256, 256, 854, 480);
+		Window.setStartCursor("cursor test red.png", 0, 0);
 		
 		NeonEngine.createWindow();
 		
@@ -74,7 +73,6 @@ public class Puzzle extends Game{
 		FreeLook look = new FreeLook(0.15f);
 		playerHead.addComponent(look);
 		PlayerComponent playerComponent = new PlayerComponent(camera);
-//		playerComponent.getCapsule().setTransform(player.getTransform());
 		playerComponent.getBox().setTransform(player.getTransform());
 		player.addComponent(playerComponent);
 		Listener listener = new Listener();
@@ -88,8 +86,8 @@ public class Puzzle extends Game{
 		swordDelay.addComponent(new DelayLook(look));
 		Entity sword = new Entity();
 		Material swordMatterial = new Material();
-		swordMatterial.setDiffuseMap(new Texture("redSword.png", true));
-		swordMatterial.setEmissiveMap(new Texture("block60_glow.png", true));
+		swordMatterial.setDiffuseMap(new Texture("whiteSword.png", true));
+		swordMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
 		sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordMatterial));
 		sword.getTransform().setScale(0.5f);
 		sword.getTransform().setPos(0.75f, 0, 1.25f);
