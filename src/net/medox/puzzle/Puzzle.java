@@ -6,7 +6,6 @@ import net.medox.neonengine.components.FullscreenSetter;
 import net.medox.neonengine.components.Lock2D;
 import net.medox.neonengine.components.MeshRenderer;
 import net.medox.neonengine.components.MeshRenderer2D;
-import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;
@@ -70,44 +69,39 @@ public class Puzzle extends Game{
 		Entity playerHead = new Entity();
 		player.getTransform().setPos(4, 4, 4);
 		playerHead.getTransform().setPos(0, /*0.75f*//*0.0125f*/0.7375f, 0);
-		Camera cam = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
-		playerHead.addComponent(cam);
+		Camera camera = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
+		playerHead.addComponent(camera);
 		FreeLook look = new FreeLook(0.15f);
 		playerHead.addComponent(look);
-		PlayerComponent p = new PlayerComponent(cam);
-//		p.getCapsule().setTransform(player.getTransform());
-		p.getBox().setTransform(player.getTransform());
-		player.addComponent(p);
+		PlayerComponent playerComponent = new PlayerComponent(camera);
+//		playerComponent.getCapsule().setTransform(player.getTransform());
+		playerComponent.getBox().setTransform(player.getTransform());
+		player.addComponent(playerComponent);
 		Listener listener = new Listener();
 		playerHead.addComponent(listener);
 		player.addChild(playerHead);
+		
+		player.addComponent(new FullscreenSetter());
 		addEntity(player);
 		
-//		ArrayList<Quaternion> quaternions = new ArrayList<Quaternion>();
-		
-		Entity swordS = new Entity();
-		swordS.addComponent(new DelayLook(look/*, quaternions, 120/2, false*/));
+		Entity swordDelay = new Entity();
+		swordDelay.addComponent(new DelayLook(look));
 		Entity sword = new Entity();
-		Material swordM = new Material();
-		swordM.setDiffuseMap(new Texture("redSword.png", true));
-		swordM.setEmissiveMap(new Texture("block60_glow.png", true));
-		sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordM));
+		Material swordMatterial = new Material();
+		swordMatterial.setDiffuseMap(new Texture("redSword.png", true));
+		swordMatterial.setEmissiveMap(new Texture("block60_glow.png", true));
+		sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordMatterial));
 		sword.getTransform().setScale(0.5f);
 		sword.getTransform().setPos(0.75f, 0, 1.25f);
 		sword.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(90));
-		swordS.addChild(sword);
-		playerHead.addChild(swordS);
-		
-		Entity changeMode = new Entity();
-		changeMode.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker()).addComponent(new ChangeMode());
-		addEntity(changeMode);
+		swordDelay.addChild(sword);
+		playerHead.addChild(swordDelay);
 		
 		Entity directionalLightObject = new Entity();
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
 		directionalLightObject.addComponent(directionalLight);
 		directionalLightObject.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float)Math.toRadians(-45)));
 		directionalLightObject.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(45));
-		
 		addEntity(directionalLightObject);
 		
 		Material material = new Material();
@@ -129,13 +123,15 @@ public class Puzzle extends Game{
 			}
 		}
 		
-		Entity2D e = new Entity2D();
-		MeshRenderer2D c = new MeshRenderer2D(new Texture("testeroonie2.png", true));
-		Lock2D l = new Lock2D(-16/2, -16/2, new Vector2f(0.5f, 0.5f));
-		e.addComponent(c);
-		e.addComponent(l);
-		e.getTransform().setPos(Window.getWidth()/2-16/2, Window.getHeight()/2-16/2);
-		e.getTransform().setScale(16);
-		addEntity2D(e);
+		Entity2D crosshair = new Entity2D();
+		MeshRenderer2D crosshairRenderer = new MeshRenderer2D(new Texture("testeroonie2.png", true));
+		Lock2D crosshairLock = new Lock2D(-16/2, -16/2, new Vector2f(0.5f, 0.5f));
+		crosshair.addComponent(crosshairRenderer);
+		crosshair.addComponent(crosshairLock);
+		crosshair.getTransform().setPos(Window.getWidth()/2-16/2, Window.getHeight()/2-16/2);
+		crosshair.getTransform().setScale(16);
+		
+		crosshair.addComponent(new FPS());
+		addEntity2D(crosshair);
 	}
 }
