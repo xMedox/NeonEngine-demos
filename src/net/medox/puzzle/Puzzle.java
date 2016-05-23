@@ -103,8 +103,8 @@ public class Puzzle extends Game{
 		swordDelay.addComponent(new DelayLook(look));
 		Entity sword = new Entity();
 		Material swordMatterial = new Material();
-		swordMatterial.setDiffuseMap(new Texture("whiteSword.png", true));
-		swordMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
+		swordMatterial.setDiffuseMap(new Texture("shadow.png", true));
+		swordMatterial.setEmissiveMap(new Texture("white.png", true));
 		sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordMatterial));
 		sword.getTransform().setScale(0.5f);
 		sword.getTransform().setPos(0.75f, 0, 1.25f);
