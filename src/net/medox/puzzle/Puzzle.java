@@ -6,6 +6,7 @@ import net.medox.neonengine.components.FullscreenSetter;
 import net.medox.neonengine.components.Lock2D;
 import net.medox.neonengine.components.MeshRenderer;
 import net.medox.neonengine.components.MeshRenderer2D;
+import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;
@@ -94,7 +95,7 @@ public class Puzzle extends Game{
 		playerHead.addComponent(listener);
 		player.addChild(playerHead);
 		
-		player.addComponent(new FullscreenSetter());
+		player.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker());
 		addEntity(player);
 		
 		Entity swordDelay = new Entity();
