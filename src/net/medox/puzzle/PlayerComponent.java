@@ -106,6 +106,8 @@ public class PlayerComponent extends EntityComponent{
 			
 			if(ray.hasHit()){
 				shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+			}else{
+				shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 			}
 			
 			if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed()){
