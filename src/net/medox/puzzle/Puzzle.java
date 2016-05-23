@@ -66,9 +66,10 @@ public class Puzzle extends Game{
 		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
 		Entity2D shadowCooldown = new Entity2D();
-		Lock2D shadowCooldownLock = new Lock2D(4, -80-27+8, new Vector2f(0, 1));
+//		Lock2D shadowCooldownLock = new Lock2D(4, -31, new Vector2f(0, 1));
+		Lock2D shadowCooldownLock = new Lock2D(-60, -14-8-4, new Vector2f(0.5f, 0.5f));
 		shadowCooldown.addComponent(shadowCooldownLock);
-		shadowCooldown.getTransform().setScale(new Vector2f(202, 27));
+		shadowCooldown.getTransform().setScale(new Vector2f(120, 14));
 		addEntity2D(shadowCooldown);
 		
 		Entity shadow = new Entity();
