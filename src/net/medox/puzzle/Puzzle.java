@@ -81,6 +81,15 @@ public class Puzzle extends Game{
 		shadow.getTransform().setScale(new Vector3f(1, 2, 1));
 		addEntity(shadow);
 		
+		Entity shadowShow = new Entity();
+		Material shadowShowMatterial = new Material();
+		shadowShowMatterial.setDiffuseMap(new Texture("shadowShow.png", true));
+		shadowShowMatterial.setEmissiveMap(new Texture("white.png", true));
+		shadowShow.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
+		shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
+		shadowShow.getTransform().setScale(new Vector3f(1, 2, 1));
+		addEntity(shadowShow);
+		
 		Entity player = new Entity();
 		Entity playerHead = new Entity();
 		player.getTransform().setPos(4, 4, 4);
@@ -89,7 +98,7 @@ public class Puzzle extends Game{
 		playerHead.addComponent(camera);
 		FreeLook look = new FreeLook(0.15f);
 		playerHead.addComponent(look);
-		PlayerComponent playerComponent = new PlayerComponent(camera, shadow, shadowCooldown);
+		PlayerComponent playerComponent = new PlayerComponent(camera, shadow, shadowShow, shadowCooldown);
 		playerComponent.getBox().setTransform(player.getTransform());
 		player.addComponent(playerComponent);
 		Listener listener = new Listener();

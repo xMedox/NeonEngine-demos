@@ -1,0 +1,3 @@
+Time based puzzle(you have to activate a switch and teleport back to the exit to your shadow)
+You have to teleport over a bottomless pit with your shadow
+Shadow teleport animation

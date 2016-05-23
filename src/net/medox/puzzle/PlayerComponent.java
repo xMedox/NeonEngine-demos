@@ -23,11 +23,12 @@ public class PlayerComponent extends EntityComponent{
 	private CharacterController controller;
 	
 	private Entity shadow;
+	private Entity shadowShow;
 	private boolean shadowSet;
 	private Entity2D shadowCooldown2D;
 	private Progressbar shadowCooldownProgressbar;
 	
-	public PlayerComponent(Camera camera, Entity shadow, Entity2D shadowCooldown2D){
+	public PlayerComponent(Camera camera, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
 		box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
 		
 //		capsule.setMassProps(2.5f, new Vector3f(0, 0, 0));
@@ -58,6 +59,7 @@ public class PlayerComponent extends EntityComponent{
 		
 		this.camera = camera;
 		this.shadow = shadow;
+		this.shadowShow = shadowShow;
 		this.shadowCooldown2D = shadowCooldown2D;
 	}
 	
@@ -100,16 +102,23 @@ public class PlayerComponent extends EntityComponent{
 		}else{
 			shadowCooldownProgressbar.removeSelf();
 			
+			Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(10)));
+			
+			if(ray.hasHit()){
+				shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+			}
+			
 			if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed()){
 				shadowTimer = shadowCooldown;
 				
 				shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 				
-				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(10)));
-				
+//				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(10)));
+//				
 				if(ray.hasHit()){
-					shadow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+					shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());
 					shadowSet = true;
+					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 				}
 				
 //				if(ray.getHitCollider().getGroup() == 1){
@@ -136,7 +145,7 @@ public class PlayerComponent extends EntityComponent{
 			}
 		}
 		
-		if(Input.getMouseDown(Input.BUTTON_RIGHT) && shadowSet){
+		if(Input.getMouseDown(Input.BUTTON_RIGHT) && Input.isGrabbed() && shadowSet){
 			controller.setPos(shadow.getTransform().getTransformedPos());
 			shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 			shadowSet = false;
