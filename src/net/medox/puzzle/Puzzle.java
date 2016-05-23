@@ -64,6 +64,21 @@ public class Puzzle extends Game{
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
 		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
+		Entity2D shadowCooldown = new Entity2D();
+		Lock2D shadowCooldownLock = new Lock2D(4, -80-27+8, new Vector2f(0, 1));
+		shadowCooldown.addComponent(shadowCooldownLock);
+		shadowCooldown.getTransform().setScale(new Vector2f(202, 27));
+		addEntity2D(shadowCooldown);
+		
+		Entity shadow = new Entity();
+		Material shadowMatterial = new Material();
+		shadowMatterial.setDiffuseMap(new Texture("shadow.png", true));
+		shadowMatterial.setEmissiveMap(new Texture("white.png", true));
+		shadow.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowMatterial));
+		shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
+		shadow.getTransform().setScale(new Vector3f(1, 2, 1));
+		addEntity(shadow);
+		
 		Entity player = new Entity();
 		Entity playerHead = new Entity();
 		player.getTransform().setPos(4, 4, 4);
@@ -72,7 +87,7 @@ public class Puzzle extends Game{
 		playerHead.addComponent(camera);
 		FreeLook look = new FreeLook(0.15f);
 		playerHead.addComponent(look);
-		PlayerComponent playerComponent = new PlayerComponent(camera);
+		PlayerComponent playerComponent = new PlayerComponent(camera, shadow, shadowCooldown);
 		playerComponent.getBox().setTransform(player.getTransform());
 		player.addComponent(playerComponent);
 		Listener listener = new Listener();

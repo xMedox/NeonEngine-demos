@@ -1,5 +1,8 @@
 package net.medox.puzzle;
 
+import net.medox.neonengine.components.Progressbar;
+import net.medox.neonengine.core.Entity;
+import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Input;
 import net.medox.neonengine.core.Transform;
@@ -7,17 +10,24 @@ import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.physics.Box;
 import net.medox.neonengine.physics.CharacterController;
 import net.medox.neonengine.physics.PhysicsEngine;
+import net.medox.neonengine.physics.Ray;
 import net.medox.neonengine.rendering.Camera;
 
 public class PlayerComponent extends EntityComponent{
 	private Camera camera;
 	private Box box;
 	
-	private float attackTimer;
+	private float shadowCooldown;
+	private float shadowTimer;
 	
 	private CharacterController controller;
 	
-	public PlayerComponent(Camera camera){
+	private Entity shadow;
+	private boolean shadowSet;
+	private Entity2D shadowCooldown2D;
+	private Progressbar shadowCooldownProgressbar;
+	
+	public PlayerComponent(Camera camera, Entity shadow, Entity2D shadowCooldown2D){
 		box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
 		
 //		capsule.setMassProps(2.5f, new Vector3f(0, 0, 0));
@@ -41,7 +51,14 @@ public class PlayerComponent extends EntityComponent{
 		
 		controller.setMaxSlope((float)Math.toRadians(55));
 		
+		shadowCooldown = 4*60*0.016666668f;
+		
+		shadowCooldownProgressbar = new Progressbar(1, new Vector3f(0.46666666666f, 0.75686274509f, 1));
+		shadowCooldown2D.addComponent(shadowCooldownProgressbar);
+		
 		this.camera = camera;
+		this.shadow = shadow;
+		this.shadowCooldown2D = shadowCooldown2D;
 	}
 	
 	public Box getBox(){
@@ -76,14 +93,25 @@ public class PlayerComponent extends EntityComponent{
 ////			audio.setRolloffFactor(0.25f);
 //		}
 		
-		if(attackTimer > 0){
-			attackTimer -= delta;
+		if(shadowTimer > 0){
+			shadowTimer -= delta;
+			
+			shadowCooldownProgressbar.setProgress(/*(shadowCooldown-shadowTimer)/shadowCooldown*/shadowTimer/shadowCooldown);
 		}else{
+			shadowCooldownProgressbar.removeSelf();
+			
 			if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed()){
-				attackTimer = 2*60*0.016666668f;
+				shadowTimer = shadowCooldown;
 				
-//				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(3)));
-//				
+				shadowCooldown2D.addComponent(shadowCooldownProgressbar);
+				
+				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(10)));
+				
+				if(ray.hasHit()){
+					shadow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+					shadowSet = true;
+				}
+				
 //				if(ray.getHitCollider().getGroup() == 1){
 //					WolfComponent wolf = (WolfComponent)ray.getHitCollider().getObject();
 //					if(!wolf.isDead()){
@@ -106,6 +134,12 @@ public class PlayerComponent extends EntityComponent{
 //					}
 //				}
 			}
+		}
+		
+		if(Input.getMouseDown(Input.BUTTON_RIGHT) && shadowSet){
+			controller.setPos(shadow.getTransform().getTransformedPos());
+			shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
+			shadowSet = false;
 		}
 		
 		if(Input.getKey(Input.KEY_LEFT_SHIFT)){

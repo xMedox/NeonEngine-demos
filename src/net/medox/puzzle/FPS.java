@@ -8,7 +8,7 @@ public class FPS extends Entity2DComponent{
 	private Vector3f color;
 	
 	public FPS(){
-		color = new Vector3f(1, 1, 1);
+		color = new Vector3f(0.46666666666f, 0.75686274509f, 1);
 	}
 	
 	@Override
