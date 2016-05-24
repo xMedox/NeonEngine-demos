@@ -4,3 +4,6 @@ Shadow teleport animation
 You should only be able to place shadows on the ground
 Trick enemies with your shadow
 Create a new skybox
+Delete collision objects
+
+First scene you find the shadow creator in a prision and escape

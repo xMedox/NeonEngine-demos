@@ -767,6 +767,8 @@ public class World extends EntityComponent{
 			if(Input.getKeyDown(Input.KEY_N)){
 				wait = 2;
 				
+				collisionObjects = new ArrayList<CollisionObject>();
+				
 				Thread thread = new Thread("load"){
 					public void run(){
 						load();
