@@ -5,6 +5,7 @@ import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Input;
+import net.medox.neonengine.core.Time;
 import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.physics.Box;
@@ -52,7 +53,7 @@ public class PlayerComponent extends EntityComponent{
 		
 		controller.setMaxSlope((float)Math.toRadians(55));
 		
-		shadowCooldown = 4*60*0.016666668f;
+		shadowCooldown = 4*Time.getSecond();
 		
 		shadowCooldownProgressbar = new Progressbar(1, new Vector3f(0.46666666666f, 0.75686274509f, 1));
 		shadowCooldown2D.addComponent(shadowCooldownProgressbar);

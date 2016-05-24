@@ -126,7 +126,7 @@ public class WolfComponent extends EntityComponent{
 				
 				move(dir.mul(speed));
 	//		}else{
-	//			timer = 1*60*0.016666668f;
+	//			timer = 1*Time.getSecond();
 				
 	//			int i = Util.randomInt(0, 4);
 	//			
