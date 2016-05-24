@@ -41,7 +41,7 @@ public class PlayerComponent extends EntityComponent{
 		box.setSleepingThresholds(0, 0);
 		
 		Transform t = new Transform();
-		t.setPos(new Vector3f(4, 4, 4));
+		t.setPos(new Vector3f(1, 10, 1));
 		box.setTransform(t);
 		
 		controller = new CharacterController(box, 0.05f);

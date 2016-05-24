@@ -92,7 +92,7 @@ public class Puzzle extends Game{
 		
 		Entity player = new Entity();
 		Entity playerHead = new Entity();
-		player.getTransform().setPos(4, 4, 4);
+		player.getTransform().setPos(1, 10, 1);
 		playerHead.getTransform().setPos(0, /*0.75f*//*0.0125f*/0.7375f, 0);
 		Camera camera = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
 		playerHead.addComponent(camera);
@@ -132,20 +132,20 @@ public class Puzzle extends Game{
 		material.setDiffuseMap(new Texture("blocks.png", true));
 		material.setEmissiveMap(new Texture("blocks_glow.png", true));
 		
-		Mesh mesh = new Mesh("blocks.obj");
+		Mesh mesh = new Mesh("PuzzleBlocks.obj");
 		
-		for(int x = 0; x < 3; x++){
-			for(int z = 0; z < 3; z++){
+//		for(int x = 0; x < 3; x++){
+//			for(int z = 0; z < 3; z++){
 				Entity world = new Entity();
 				world.addComponent(new MeshRenderer(mesh, material));
-				world.getTransform().setPos(x*16, 0, z*16);
+//				world.getTransform().setPos(/*x*16*/0, 0, /*z*16*/0);
 				
 				Entity collision = new Entity();
-				world.addComponent(new CollisionAdder("World/blocks_collision.txt", collision, new Vector3f(x*16, 0, z*16)));
+				world.addComponent(new CollisionAdder("World/PuzzleBlocksCollision.txt", collision));
 				world.addChild(collision);
 				addEntity(world);
-			}
-		}
+//			}
+//		}
 		
 		Entity2D crosshair = new Entity2D();
 		MeshRenderer2D crosshairRenderer = new MeshRenderer2D(new Texture("testeroonie2.png", true));
