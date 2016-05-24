@@ -68,7 +68,7 @@ public class PuzzleEditor extends Game{
 		addEntity(directionalLightObject);
 		
 		Entity world = new Entity();
-		World w = new World();
+		World w = new World(camera);
 		world.addComponent(w);
 		addEntity(world);
 		

@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Input;
 import net.medox.neonengine.core.Transform;
@@ -39,7 +40,10 @@ public class World extends EntityComponent{
 	
 	private int wait;
 	
-	public World(){
+	private Entity camera;
+	private float distance = 4;
+	
+	public World(Entity camera){
 		blocks = new Block[worldWidth][worldHeight][worldLenght];
 		
 		collisionObjects = new ArrayList<CollisionObject>();
@@ -61,6 +65,8 @@ public class World extends EntityComponent{
 		}
 		
 		selectedTexture = new int[]{0, 0};
+		
+		this.camera = camera;
 	}
 	
 	public void load(){
@@ -590,55 +596,91 @@ public class World extends EntityComponent{
 	@Override
 	public void input(float delta){
 		if(wait == 0){
-			if(Input.getKeyDown(Input.KEY_LEFT_CONTROL)){
-				if(selY > 0){
-					blocks[selX][selY][selZ].seleted = false;
-					
-					selY -= 1;
-					
-					blocks[selX][selY][selZ].seleted = true;
-				}
-			}else if(Input.getKeyDown(Input.KEY_SPACE)){
-				if(selY < worldHeight-1){
-					blocks[selX][selY][selZ].seleted = false;
-					
-					selY += 1;
-					
-					blocks[selX][selY][selZ].seleted = true;
-				}
-			}else if(Input.getKeyDown(Input.KEY_LEFT)){
-				if(selX > 0){
-					blocks[selX][selY][selZ].seleted = false;
-					
-					selX -= 1;
-					
-					blocks[selX][selY][selZ].seleted = true;
-				}
-			}else if(Input.getKeyDown(Input.KEY_RIGHT)){
-				if(selX < worldWidth-1){
-					blocks[selX][selY][selZ].seleted = false;
-					
-					selX += 1;
-					
-					blocks[selX][selY][selZ].seleted = true;
-				}
-			}else if(Input.getKeyDown(Input.KEY_UP)){
-				if(selZ < worldLenght-1){
-					blocks[selX][selY][selZ].seleted = false;
-					
-					selZ += 1;
-					
-					blocks[selX][selY][selZ].seleted = true;
-				}
+//			if(Input.getKeyDown(Input.KEY_LEFT_CONTROL)){
+//				if(selY > 0){
+//					blocks[selX][selY][selZ].seleted = false;
+//					
+//					selY -= 1;
+//					
+//					blocks[selX][selY][selZ].seleted = true;
+//				}
+//			}else if(Input.getKeyDown(Input.KEY_SPACE)){
+//				if(selY < worldHeight-1){
+//					blocks[selX][selY][selZ].seleted = false;
+//					
+//					selY += 1;
+//					
+//					blocks[selX][selY][selZ].seleted = true;
+//				}
+//			}else if(Input.getKeyDown(Input.KEY_LEFT)){
+//				if(selX > 0){
+//					blocks[selX][selY][selZ].seleted = false;
+//					
+//					selX -= 1;
+//					
+//					blocks[selX][selY][selZ].seleted = true;
+//				}
+//			}else if(Input.getKeyDown(Input.KEY_RIGHT)){
+//				if(selX < worldWidth-1){
+//					blocks[selX][selY][selZ].seleted = false;
+//					
+//					selX += 1;
+//					
+//					blocks[selX][selY][selZ].seleted = true;
+//				}
+//			}else if(Input.getKeyDown(Input.KEY_UP)){
+//				if(selZ < worldLenght-1){
+//					blocks[selX][selY][selZ].seleted = false;
+//					
+//					selZ += 1;
+//					
+//					blocks[selX][selY][selZ].seleted = true;
+//				}
+//			}else if(Input.getKeyDown(Input.KEY_DOWN)){
+//				if(selZ > 0){
+//					blocks[selX][selY][selZ].seleted = false;
+//					
+//					selZ -= 1;
+//					
+//					blocks[selX][selY][selZ].seleted = true;
+//				}
+//			}
+			
+			if(Input.getKeyDown(Input.KEY_UP)){
+				distance += 0.5f;
 			}else if(Input.getKeyDown(Input.KEY_DOWN)){
-				if(selZ > 0){
-					blocks[selX][selY][selZ].seleted = false;
-					
-					selZ -= 1;
-					
-					blocks[selX][selY][selZ].seleted = true;
-				}
+				distance -= 0.5f;
 			}
+			
+			Vector3f pos = camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(distance));
+			
+			blocks[selX][selY][selZ].seleted = false;
+			
+			if(Math.round(pos.getX()) >= 0 && Math.round(pos.getX()) < worldWidth){
+				selX = Math.round(pos.getX());
+			}else if(Math.round(pos.getX()) < 0){
+				selX = 0;
+			}else if(Math.round(pos.getX()) >= worldWidth){
+				selX = worldWidth-1;
+			}
+			
+			if(Math.round(pos.getY()) >= 0 && Math.round(pos.getY()) < worldHeight){
+				selY = Math.round(pos.getY());
+			}else if(Math.round(pos.getY()) < 0){
+				selY = 0;
+			}else if(Math.round(pos.getY()) >= worldHeight){
+				selY = worldHeight-1;
+			}
+			
+			if(Math.round(pos.getZ()) >= 0 && Math.round(pos.getZ()) < worldLenght){
+				selZ = Math.round(pos.getZ());
+			}else if(Math.round(pos.getZ()) < 0){
+				selZ = 0;
+			}else if(Math.round(pos.getZ()) >= worldLenght){
+				selZ = worldLenght-1;
+			}
+			
+			blocks[selX][selY][selZ].seleted = true;
 			
 			if(!renderCollision){
 				if(Input.getMouse(Input.BUTTON_LEFT)){
