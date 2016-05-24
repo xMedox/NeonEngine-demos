@@ -37,6 +37,8 @@ public class World extends EntityComponent{
 	
 	private boolean renderCollision;
 	
+	private int wait;
+	
 	public World(){
 		blocks = new Block[worldWidth][worldHeight][worldLenght];
 		
@@ -225,13 +227,13 @@ public class World extends EntityComponent{
 		String output = "";
 		
 		boolean start = true;
+		int save;
+		String s;
     	
 		for(int x = 0; x < worldWidth; x++){
 			for(int y = 0; y < worldHeight; y++){
 				for(int z = 0; z < worldLenght; z++){
-					int save = (blocks[x][y][z].texture[0]+1)+(blocks[x][y][z].texture[1]*10);
-					
-					String s = "";
+					save = (blocks[x][y][z].texture[0]+1)+(blocks[x][y][z].texture[1]*10);
 					
 					if(start){
 						s = String.valueOf(save);
@@ -587,191 +589,240 @@ public class World extends EntityComponent{
 	
 	@Override
 	public void input(float delta){
-		if(Input.getKeyDown(Input.KEY_LEFT_CONTROL)){
-			if(selY > 0){
-				blocks[selX][selY][selZ].seleted = false;
-				
-				selY -= 1;
-				
-				blocks[selX][selY][selZ].seleted = true;
-			}
-		}else if(Input.getKeyDown(Input.KEY_SPACE)){
-			if(selY < worldHeight-1){
-				blocks[selX][selY][selZ].seleted = false;
-				
-				selY += 1;
-				
-				blocks[selX][selY][selZ].seleted = true;
-			}
-		}else if(Input.getKeyDown(Input.KEY_LEFT)){
-			if(selX > 0){
-				blocks[selX][selY][selZ].seleted = false;
-				
-				selX -= 1;
-				
-				blocks[selX][selY][selZ].seleted = true;
-			}
-		}else if(Input.getKeyDown(Input.KEY_RIGHT)){
-			if(selX < worldWidth-1){
-				blocks[selX][selY][selZ].seleted = false;
-				
-				selX += 1;
-				
-				blocks[selX][selY][selZ].seleted = true;
-			}
-		}else if(Input.getKeyDown(Input.KEY_UP)){
-			if(selZ < worldLenght-1){
-				blocks[selX][selY][selZ].seleted = false;
-				
-				selZ += 1;
-				
-				blocks[selX][selY][selZ].seleted = true;
-			}
-		}else if(Input.getKeyDown(Input.KEY_DOWN)){
-			if(selZ > 0){
-				blocks[selX][selY][selZ].seleted = false;
-				
-				selZ -= 1;
-				
-				blocks[selX][selY][selZ].seleted = true;
-			}
-		}
-		
-		if(!renderCollision){
-			if(Input.getMouse(Input.BUTTON_LEFT)){
-				blocks[selX][selY][selZ].texture = new int[]{-1, 0};
-				blocks[selX][selY][selZ].solid = false;
-			}else if(Input.getMouse(Input.BUTTON_RIGHT)){
-				blocks[selX][selY][selZ].texture = selectedTexture;
-				blocks[selX][selY][selZ].solid = true;
-			}else if(Input.getMouse(Input.BUTTON_MIDDLE)){
-				if(blocks[selX][selY][selZ].texture[0] != -1){
-					selectedTexture = blocks[selX][selY][selZ].texture;
+		if(wait == 0){
+			if(Input.getKeyDown(Input.KEY_LEFT_CONTROL)){
+				if(selY > 0){
+					blocks[selX][selY][selZ].seleted = false;
+					
+					selY -= 1;
+					
+					blocks[selX][selY][selZ].seleted = true;
 				}
+			}else if(Input.getKeyDown(Input.KEY_SPACE)){
+				if(selY < worldHeight-1){
+					blocks[selX][selY][selZ].seleted = false;
+					
+					selY += 1;
+					
+					blocks[selX][selY][selZ].seleted = true;
+				}
+			}else if(Input.getKeyDown(Input.KEY_LEFT)){
+				if(selX > 0){
+					blocks[selX][selY][selZ].seleted = false;
+					
+					selX -= 1;
+					
+					blocks[selX][selY][selZ].seleted = true;
+				}
+			}else if(Input.getKeyDown(Input.KEY_RIGHT)){
+				if(selX < worldWidth-1){
+					blocks[selX][selY][selZ].seleted = false;
+					
+					selX += 1;
+					
+					blocks[selX][selY][selZ].seleted = true;
+				}
+			}else if(Input.getKeyDown(Input.KEY_UP)){
+				if(selZ < worldLenght-1){
+					blocks[selX][selY][selZ].seleted = false;
+					
+					selZ += 1;
+					
+					blocks[selX][selY][selZ].seleted = true;
+				}
+			}else if(Input.getKeyDown(Input.KEY_DOWN)){
+				if(selZ > 0){
+					blocks[selX][selY][selZ].seleted = false;
+					
+					selZ -= 1;
+					
+					blocks[selX][selY][selZ].seleted = true;
+				}
+			}
+			
+			if(!renderCollision){
+				if(Input.getMouse(Input.BUTTON_LEFT)){
+					blocks[selX][selY][selZ].texture = new int[]{-1, 0};
+					blocks[selX][selY][selZ].solid = false;
+				}else if(Input.getMouse(Input.BUTTON_RIGHT)){
+					blocks[selX][selY][selZ].texture = selectedTexture;
+					blocks[selX][selY][selZ].solid = true;
+				}else if(Input.getMouse(Input.BUTTON_MIDDLE)){
+					if(blocks[selX][selY][selZ].texture[0] != -1){
+						selectedTexture = blocks[selX][selY][selZ].texture;
+					}
+				}
+			}else{
+				if(Input.getMouseDown(Input.BUTTON_LEFT)){
+					if(selXColl == -1){
+						selXColl = selX;
+						selYColl = selY;
+						selZColl = selZ;
+					}else{
+						int width;
+						int height;
+						int lenght;
+						
+	//					if(selX-selXColl > 0){
+	//						width = selX-selXColl;
+	//					}else{
+	//						width = selXColl-selX;
+	//					}
+	//					
+	//					if(selYColl-selYColl > 0){
+	//						height = selY-selYColl;
+	//					}else{
+	//						height = selYColl-selY;
+	//					}
+	//					
+	//					if(selZ-selZColl > 0){
+	//						lenght = selZ-selZColl;
+	//					}else{
+	//						lenght = selZColl-selZ;
+	//					}
+						
+						width = selX-selXColl+1;
+						height = selY-selYColl+1;
+						lenght = selZ-selZColl+1;
+						
+						if(width != 0 || height != 0 || lenght != 0){
+							collisionObjects.add(new CollisionObject(selXColl, selYColl, selZColl, width, height, lenght));
+						}
+						
+						selXColl = -1;
+						selYColl = -1;
+						selZColl = -1;
+					}
+				}
+			}
+			
+			if(Input.getKeyDown(Input.KEY_Q)){
+				renderCollision = !renderCollision;
+			}
+			
+			if(Input.getKeyDown(Input.KEY_1)){
+				selectedTexture = new int[]{0, 0};
+			}else if(Input.getKeyDown(Input.KEY_2)){
+				selectedTexture = new int[]{1, 0};
+			}else if(Input.getKeyDown(Input.KEY_3)){
+				selectedTexture = new int[]{2, 0};
+			}else if(Input.getKeyDown(Input.KEY_4)){
+				selectedTexture = new int[]{3, 0};
+			}else if(Input.getKeyDown(Input.KEY_5)){
+				selectedTexture = new int[]{4, 0};
+			}else if(Input.getKeyDown(Input.KEY_6)){
+				selectedTexture = new int[]{5, 0};
+			}else if(Input.getKeyDown(Input.KEY_7)){
+				selectedTexture = new int[]{6, 0};
+			}else if(Input.getKeyDown(Input.KEY_8)){
+				selectedTexture = new int[]{7, 0};
+			}else if(Input.getKeyDown(Input.KEY_9)){
+				selectedTexture = new int[]{8, 0};
+			}else if(Input.getKeyDown(Input.KEY_0)){
+				selectedTexture = new int[]{9, 0};
+			}
+			
+			if(Input.getKeyDown(Input.KEY_I)){
+				selectedTexture = new int[]{0, 1};
+			}else if(Input.getKeyDown(Input.KEY_O)){
+				selectedTexture = new int[]{1, 1};
+			}else if(Input.getKeyDown(Input.KEY_P)){
+				selectedTexture = new int[]{2, 1};
+			}else if(Input.getKeyDown(Input.KEY_J)){
+				selectedTexture = new int[]{3, 1};
+			}else if(Input.getKeyDown(Input.KEY_K)){
+				selectedTexture = new int[]{4, 1};
+			}else if(Input.getKeyDown(Input.KEY_L)){
+				selectedTexture = new int[]{5, 1};
+			}else if(Input.getKeyDown(Input.KEY_X)){
+				selectedTexture = new int[]{6, 1};
+			}else if(Input.getKeyDown(Input.KEY_C)){
+				selectedTexture = new int[]{7, 1};
+			}else if(Input.getKeyDown(Input.KEY_V)){
+				selectedTexture = new int[]{8, 1};
+			}
+			
+			if(Input.getMouseWheelValue() == Input.WHEEL_UP){
+				if(selectedTexture[0] == 8 && selectedTexture[1] == 1){
+					
+				}else{
+					if(selectedTexture[0] == 9){
+						selectedTexture = new int[]{0, selectedTexture[1]+1};
+					}else{
+						selectedTexture = new int[]{selectedTexture[0]+1, selectedTexture[1]};
+					}
+				}
+			}else if(Input.getMouseWheelValue() == Input.WHEEL_DOWN){
+				if(selectedTexture[0] == 0 && selectedTexture[1] == 0){
+					
+				}else{
+					if(selectedTexture[0] == 0){
+						selectedTexture = new int[]{0, selectedTexture[1]-1};
+					}else{
+						selectedTexture = new int[]{selectedTexture[0]-1, selectedTexture[1]};
+					}
+				}
+			}
+			
+			if(Input.getKeyDown(Input.KEY_N)){
+				wait = 2;
+				
+				Thread thread = new Thread("load"){
+					public void run(){
+						load();
+						System.out.println("DONE LOADING");
+						wait -= 1;
+					}
+				};
+				
+				thread.start();
+				
+				Thread thread2 = new Thread("loadCollision"){
+					public void run(){
+						loadCollision();
+						System.out.println("DONE LOADING COLLISION");
+						wait -= 1;
+					}
+				};
+				
+				thread2.start();
+			}
+			
+			if(Input.getKeyDown(Input.KEY_M)){
+				wait = 3;
+				
+				Thread thread = new Thread("save"){
+					public void run(){
+						save();
+						System.out.println("DONE SAVING");
+						wait -= 1;
+					}
+				};
+				
+				thread.start();
+				
+				Thread thread2 = new Thread("saveModel"){
+					public void run(){
+						saveModel();
+						System.out.println("DONE SAVING MODEL");
+						wait -= 1;
+					}
+				};
+				
+				thread2.start();
+				
+				Thread thread3 = new Thread("saveCollision"){
+					public void run(){
+						saveCollision();
+						System.out.println("DONE SAVING COLLISION");
+						wait -= 1;
+					}
+				};
+				
+				thread3.start();
 			}
 		}else{
-			if(Input.getMouseDown(Input.BUTTON_LEFT)){
-				if(selXColl == -1){
-					selXColl = selX;
-					selYColl = selY;
-					selZColl = selZ;
-				}else{
-					int width;
-					int height;
-					int lenght;
-					
-//					if(selX-selXColl > 0){
-//						width = selX-selXColl;
-//					}else{
-//						width = selXColl-selX;
-//					}
-//					
-//					if(selYColl-selYColl > 0){
-//						height = selY-selYColl;
-//					}else{
-//						height = selYColl-selY;
-//					}
-//					
-//					if(selZ-selZColl > 0){
-//						lenght = selZ-selZColl;
-//					}else{
-//						lenght = selZColl-selZ;
-//					}
-					
-					width = selX-selXColl+1;
-					height = selY-selYColl+1;
-					lenght = selZ-selZColl+1;
-					
-					if(width != 0 || height != 0 || lenght != 0){
-						collisionObjects.add(new CollisionObject(selXColl, selYColl, selZColl, width, height, lenght));
-					}
-					
-					selXColl = -1;
-					selYColl = -1;
-					selZColl = -1;
-				}
-			}
-		}
-		
-		if(Input.getKeyDown(Input.KEY_Q)){
-			renderCollision = !renderCollision;
-		}
-		
-		if(Input.getKeyDown(Input.KEY_1)){
-			selectedTexture = new int[]{0, 0};
-		}else if(Input.getKeyDown(Input.KEY_2)){
-			selectedTexture = new int[]{1, 0};
-		}else if(Input.getKeyDown(Input.KEY_3)){
-			selectedTexture = new int[]{2, 0};
-		}else if(Input.getKeyDown(Input.KEY_4)){
-			selectedTexture = new int[]{3, 0};
-		}else if(Input.getKeyDown(Input.KEY_5)){
-			selectedTexture = new int[]{4, 0};
-		}else if(Input.getKeyDown(Input.KEY_6)){
-			selectedTexture = new int[]{5, 0};
-		}else if(Input.getKeyDown(Input.KEY_7)){
-			selectedTexture = new int[]{6, 0};
-		}else if(Input.getKeyDown(Input.KEY_8)){
-			selectedTexture = new int[]{7, 0};
-		}else if(Input.getKeyDown(Input.KEY_9)){
-			selectedTexture = new int[]{8, 0};
-		}else if(Input.getKeyDown(Input.KEY_0)){
-			selectedTexture = new int[]{9, 0};
-		}
-		
-		if(Input.getKeyDown(Input.KEY_I)){
-			selectedTexture = new int[]{0, 1};
-		}else if(Input.getKeyDown(Input.KEY_O)){
-			selectedTexture = new int[]{1, 1};
-		}else if(Input.getKeyDown(Input.KEY_P)){
-			selectedTexture = new int[]{2, 1};
-		}else if(Input.getKeyDown(Input.KEY_J)){
-			selectedTexture = new int[]{3, 1};
-		}else if(Input.getKeyDown(Input.KEY_K)){
-			selectedTexture = new int[]{4, 1};
-		}else if(Input.getKeyDown(Input.KEY_L)){
-			selectedTexture = new int[]{5, 1};
-		}else if(Input.getKeyDown(Input.KEY_X)){
-			selectedTexture = new int[]{6, 1};
-		}else if(Input.getKeyDown(Input.KEY_C)){
-			selectedTexture = new int[]{7, 1};
-		}else if(Input.getKeyDown(Input.KEY_V)){
-			selectedTexture = new int[]{8, 1};
-		}
-		
-		if(Input.getMouseWheelValue() == Input.WHEEL_UP){
-			if(selectedTexture[0] == 8 && selectedTexture[1] == 1){
-				
-			}else{
-				if(selectedTexture[0] == 9){
-					selectedTexture = new int[]{0, selectedTexture[1]+1};
-				}else{
-					selectedTexture = new int[]{selectedTexture[0]+1, selectedTexture[1]};
-				}
-			}
-		}else if(Input.getMouseWheelValue() == Input.WHEEL_DOWN){
-			if(selectedTexture[0] == 0 && selectedTexture[1] == 0){
-				
-			}else{
-				if(selectedTexture[0] == 0){
-					selectedTexture = new int[]{0, selectedTexture[1]-1};
-				}else{
-					selectedTexture = new int[]{selectedTexture[0]-1, selectedTexture[1]};
-				}
-			}
-		}
-		
-		if(Input.getKeyDown(Input.KEY_N)){
-			load();
-			loadCollision();
-			System.out.println("DONE LOADING");
-		}
-		
-		if(Input.getKeyDown(Input.KEY_M)){
-			save();
-			saveModel();
-			saveCollision();
-			System.out.println("DONE SAVING");
+			System.out.println("STILL PROCESSING");
 		}
 	}
 	
