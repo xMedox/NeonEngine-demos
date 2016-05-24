@@ -12,11 +12,11 @@ import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.physics.Box;
 
 public class CollisionAdder extends EntityComponent{
-	public CollisionAdder(String file, Entity e){
-		load(file, e);
+	public CollisionAdder(String file, Entity e, Vector3f pos){
+		load(file, e, pos);
 	}
 	
-	private void load(String file, Entity e){
+	private void load(String file, Entity e, Vector3f pos){
 		List<String> text = Util.loadFromFile(file);
 		
     	Pattern p = Pattern.compile(";");
@@ -35,7 +35,7 @@ public class CollisionAdder extends EntityComponent{
             int height = Integer.parseInt(article2[4]);
             int lenght = Integer.parseInt(article2[5]);
             
-            addCollision(x+0.5f*width-0.5f, y+0.5f*height-0.5f, z+0.5f*lenght-0.5f, width, height, lenght, e);
+            addCollision(x+0.5f*width-0.5f+pos.getX(), y+0.5f*height-0.5f+pos.getY(), z+0.5f*lenght-0.5f+pos.getZ(), width, height, lenght, e);
     	}
 	}
 	

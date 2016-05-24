@@ -134,18 +134,18 @@ public class Puzzle extends Game{
 		
 		Mesh mesh = new Mesh("PuzzleBlocks.obj");
 		
-//		for(int x = 0; x < 3; x++){
-//			for(int z = 0; z < 3; z++){
+		for(int x = 0; x < 3; x++){
+			for(int z = 0; z < 3; z++){
 				Entity world = new Entity();
 				world.addComponent(new MeshRenderer(mesh, material));
-//				world.getTransform().setPos(/*x*16*/0, 0, /*z*16*/0);
+				world.getTransform().setPos(x*16, 0, z*16);
 				
 				Entity collision = new Entity();
-				world.addComponent(new CollisionAdder("World/PuzzleBlocksCollision.txt", collision));
+				world.addComponent(new CollisionAdder("World/PuzzleBlocksCollision.txt", collision, new Vector3f(x*16, 0, z*16)));
 				world.addChild(collision);
 				addEntity(world);
-//			}
-//		}
+			}
+		}
 		
 		Entity2D crosshair = new Entity2D();
 		MeshRenderer2D crosshairRenderer = new MeshRenderer2D(new Texture("testeroonie2.png", true));
