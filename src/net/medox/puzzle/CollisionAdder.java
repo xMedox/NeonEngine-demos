@@ -93,8 +93,6 @@ public class CollisionAdder extends EntityComponent{
 		t.setPos(new Vector3f(x+0.5f, y+0.5f, z+0.5f));
 		t.setScale(width, height, lenght);
 		
-		System.out.println(x + "|" + y + "|" + z + "|" + width + "|" + height + "|" + lenght);
-		
 		box.setTransform(t);
 				
 		e.addComponent(new StaticPhysicsComponent(box));
