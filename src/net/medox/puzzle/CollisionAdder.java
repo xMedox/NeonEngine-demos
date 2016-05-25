@@ -5,18 +5,13 @@ import java.util.regex.Pattern;
 
 import net.medox.neonengine.components.StaticPhysicsComponent;
 import net.medox.neonengine.core.Entity;
-import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.core.Util;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.physics.Box;
 
-public class CollisionAdder extends EntityComponent{
-	public CollisionAdder(String file, Entity e, Vector3f pos){
-		load(file, e, pos);
-	}
-	
-	private void load(String file, Entity e, Vector3f pos){
+public class CollisionAdder{
+	public static void load(String file, Entity e, Vector3f pos){
 		List<String> text = Util.loadFromFile(file);
 		
     	Pattern p = Pattern.compile(";");
@@ -39,7 +34,7 @@ public class CollisionAdder extends EntityComponent{
     	}
 	}
 	
-	private void addCollision(float x, float y, float z, float width, float height, float lenght, Entity e){
+	public static void addCollision(float x, float y, float z, float width, float height, float lenght, Entity e){
 		Box box = new Box(new Vector3f(0.5f, 0.5f, 0.5f));
 		box.setMassProps(0);
 		
