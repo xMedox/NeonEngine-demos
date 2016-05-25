@@ -128,11 +128,10 @@ public class Puzzle extends Game{
 		directionalLightObject.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(45));
 		addEntity(directionalLightObject);
 		
+		Mesh meshBlocks = new Mesh("PuzzleBlocks.obj");
 		Material materialBlocks = new Material();
 		materialBlocks.setDiffuseMap(new Texture("blocks.png", true));
 		materialBlocks.setEmissiveMap(new Texture("blocks_glow.png", true));
-		
-		Mesh meshBlocks = new Mesh("PuzzleBlocks.obj");
 		
 		Entity world = new Entity();
 		for(int x = 0; x < 3; x++){
@@ -141,9 +140,7 @@ public class Puzzle extends Game{
 				chunk.addComponent(new MeshRenderer(meshBlocks, materialBlocks));
 				chunk.getTransform().setPos(x*16, 0, z*16);
 				
-				Entity collisionChunk = new Entity();
-				CollisionAdder.load("World/PuzzleBlocksCollision.txt", collisionChunk, new Vector3f(x*16, 0, z*16));
-				chunk.addChild(collisionChunk);
+				CollisionAdder.load("World/PuzzleBlocksCollision.txt", chunk, new Vector3f(x*16, 0, z*16));
 				world.addChild(chunk);
 			}
 		}
