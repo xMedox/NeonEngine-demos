@@ -76,6 +76,7 @@ public class PlayerComponent extends EntityComponent{
 	@Override
 	public void input(float delta){
 		float speed = 4;
+		float speedForward = 4;
 		
 //		if(Input.getKeyDown(Input.KEY_L)){
 //			Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getTransformedRot().getForward().mul(5)));
@@ -116,35 +117,11 @@ public class PlayerComponent extends EntityComponent{
 				
 				shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 				
-//				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(8)));
-//				
 				if(ray.hasHit()){
 					shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());
 					shadowSet = true;
 					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 				}
-				
-//				if(ray.getHitCollider().getGroup() == 1){
-//					WolfComponent wolf = (WolfComponent)ray.getHitCollider().getObject();
-//					if(!wolf.isDead()){
-//						int r = Util.randomInt(0, 2);
-//						
-//						Texture t = null;
-//						
-//						if(r == 0){
-//							t = t1;
-//						}else if(r == 1){
-//							t = t2;
-//						}else if(r == 2){
-//							t = t3;
-//						}
-//						
-//						wolf.getMeshRenderer().setDiffuseMap(t);
-//						wolf.getMeshRenderer().setEmissiveMap(g);
-//						
-//						wolf.damage(1);
-//					}
-//				}
 			}
 		}
 		
@@ -155,32 +132,32 @@ public class PlayerComponent extends EntityComponent{
 		}
 		
 		if(Input.getKey(Input.KEY_LEFT_SHIFT)){
-			speed = 6;
+			speedForward = 6;
 		}
 		
 		Vector3f dir = new Vector3f(0, 0, 0);
 		
 		if(Input.getKey(Input.KEY_W) && !Input.getKey(Input.KEY_S)){
-			dir = dir.add(camera.getTransform().getRot().getForward().mul(new Vector3f(1, 0, 1)).normalized());
+			dir = dir.add(camera.getTransform().getRot().getForward().mul(new Vector3f(1, 0, 1)).normalized().mul(speedForward));
 		}
 		
 		if(Input.getKey(Input.KEY_A) && !Input.getKey(Input.KEY_D)){
-			dir = dir.add(camera.getTransform().getRot().getLeft().mul(new Vector3f(1, 0, 1)).normalized());
+			dir = dir.add(camera.getTransform().getRot().getLeft().mul(new Vector3f(1, 0, 1)).normalized().mul(speed));
 		}
 		
 		if(Input.getKey(Input.KEY_S) && !Input.getKey(Input.KEY_W)){
-			dir = dir.add(camera.getTransform().getRot().getBack().mul(new Vector3f(1, 0, 1)).normalized());
+			dir = dir.add(camera.getTransform().getRot().getBack().mul(new Vector3f(1, 0, 1)).normalized().mul(speed));
 		}
 		
 		if(Input.getKey(Input.KEY_D) && !Input.getKey(Input.KEY_A)){
-			dir = dir.add(camera.getTransform().getRot().getRight().mul(new Vector3f(1, 0, 1)).normalized());
+			dir = dir.add(camera.getTransform().getRot().getRight().mul(new Vector3f(1, 0, 1)).normalized().mul(speed));
 		}
 		
 		if(Input.getKeyDown(Input.KEY_SPACE)){
 			controller.jump();
 		}
 		
-		move(dir.mul(speed));
+		move(dir);
 	}
 	
 	public void move(Vector3f vel){
