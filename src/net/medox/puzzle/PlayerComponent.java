@@ -103,7 +103,7 @@ public class PlayerComponent extends EntityComponent{
 		}else{
 			shadowCooldownProgressbar.removeSelf();
 			
-			Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(10)));
+			Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(8)));
 			
 			if(ray.hasHit()){
 				shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
@@ -116,7 +116,7 @@ public class PlayerComponent extends EntityComponent{
 				
 				shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 				
-//				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(10)));
+//				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(8)));
 //				
 				if(ray.hasHit()){
 					shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());

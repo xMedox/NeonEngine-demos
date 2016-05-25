@@ -74,8 +74,8 @@ public class Puzzle extends Game{
 		
 		Entity shadow = new Entity();
 		Material shadowMatterial = new Material();
-		shadowMatterial.setDiffuseMap(new Texture("shadow.png", true));
-		shadowMatterial.setEmissiveMap(new Texture("white.png", true));
+		shadowMatterial.setDiffuseMap(new Texture("shadow2.png", true));
+		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
 		shadow.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowMatterial));
 		shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 		shadow.getTransform().setScale(new Vector3f(1, 2, 1));
@@ -108,18 +108,17 @@ public class Puzzle extends Game{
 		player.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker());
 		addEntity(player);
 		
-		Entity swordDelay = new Entity();
-		swordDelay.addComponent(new DelayLook(look));
-		Entity sword = new Entity();
-		Material swordMatterial = new Material();
-		swordMatterial.setDiffuseMap(new Texture("shadow.png", true));
-		swordMatterial.setEmissiveMap(new Texture("white.png", true));
-		sword.addComponent(new MeshRenderer(new Mesh("Sword R Block.obj"), swordMatterial));
-		sword.getTransform().setScale(0.5f);
-		sword.getTransform().setPos(0.75f, 0, 1.25f);
-		sword.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(90));
-		swordDelay.addChild(sword);
-		playerHead.addChild(swordDelay);
+		Entity handDelay = new Entity();
+		handDelay.addComponent(new DelayLook(look));
+		Entity hand = new Entity();
+		Material handMatterial = new Material();
+		handMatterial.setDiffuseMap(new Texture("shadow2.png", true));
+		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
+		hand.addComponent(new MeshRenderer(new Mesh("Hand block.obj"), handMatterial));
+		hand.getTransform().setScale(0.5f);
+		hand.getTransform().setPos(0.75f, -0.5f, 1.1f);
+		handDelay.addChild(hand);
+		playerHead.addChild(handDelay);
 		
 		Entity directionalLightObject = new Entity();
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
