@@ -5,5 +5,8 @@ You should only be able to place shadows on the ground
 Trick enemies with your shadow
 Create a new skybox
 Delete collision objects
+Save the level type(find exit(normal), escape lava, (escape?))
+Blocks that you cant place a shadw on
 
 First scene you find the shadow creator in a prision and escape
+A level where lava rises and you have to go and shadow up to avid it
