@@ -1,38 +1,20 @@
 package net.medox.puzzle;
 
-import net.medox.neonengine.audio.Sound;
-import net.medox.neonengine.components.Progressbar;
-import net.medox.neonengine.core.Entity;
-import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Input;
-import net.medox.neonengine.core.Time;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.physics.Box;
 import net.medox.neonengine.physics.CharacterController;
 import net.medox.neonengine.physics.PhysicsEngine;
-import net.medox.neonengine.physics.Ray;
 import net.medox.neonengine.rendering.Camera;
 
 public class PlayerComponent extends EntityComponent{
 	private Camera camera;
 	private Box box;
 	
-	private float shadowCooldown;
-	private float shadowTimer;
-	
 	private CharacterController controller;
 	
-	private Entity shadow;
-	private Entity shadowShow;
-	private boolean shadowSet;
-	private Entity2D shadowCooldown2D;
-	private Progressbar shadowCooldownProgressbar;
-	
-	private Sound shadowSound;
-	private Sound shadowPlaceSound;
-	
-	public PlayerComponent(Camera camera, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
+	public PlayerComponent(Camera camera){
 		box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
 		
 //		capsule.setMassProps(2.5f, new Vector3f(0, 0, 0));
@@ -56,18 +38,7 @@ public class PlayerComponent extends EntityComponent{
 		
 		controller.setMaxSlope((float)Math.toRadians(55));
 		
-		shadowCooldown = 4*Time.getSecond();
-		
-		shadowCooldownProgressbar = new Progressbar(1, new Vector3f(0.46666666666f, 0.75686274509f, 1));
-		shadowCooldown2D.addComponent(shadowCooldownProgressbar);
-		
-		shadowSound = new Sound("shadowStereo.wav");
-		shadowPlaceSound = new Sound("shadowPlaceStereo.wav");
-		
 		this.camera = camera;
-		this.shadow = shadow;
-		this.shadowShow = shadowShow;
-		this.shadowCooldown2D = shadowCooldown2D;
 	}
 	
 	public CharacterController getController(){
@@ -84,49 +55,11 @@ public class PlayerComponent extends EntityComponent{
 		float speed = 4;
 		float speedForward = 4;
 		
-		if(shadowTimer > 0){
-			shadowTimer -= delta;
-			
-			shadowCooldownProgressbar.setProgress(/*(shadowCooldown-shadowTimer)/shadowCooldown*/shadowTimer/shadowCooldown);
-		}else{
-			shadowCooldownProgressbar.removeSelf();
-			
-			Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(8)));
-			
-			if(ray.hasHit()){
-				shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
-			}else{
-				shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
-			}
-			
-			if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed()){
-				shadowTimer = shadowCooldown;
-				
-				shadowCooldown2D.addComponent(shadowCooldownProgressbar);
-				
-				if(ray.hasHit()){
-					shadowPlaceSound.play();
-					
-					shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());
-					shadowSet = true;
-					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
-				}
-			}
-		}
-		
-		if(Input.getMouseDown(Input.BUTTON_RIGHT) && Input.isGrabbed() && shadowSet){
-			shadowSound.play();
-			
-			controller.setPos(shadow.getTransform().getTransformedPos());
-			shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
-			shadowSet = false;
-		}
+		Vector3f dir = new Vector3f(0, 0, 0);
 		
 		if(Input.getKey(Input.KEY_LEFT_SHIFT)){
 			speedForward = 6;
 		}
-		
-		Vector3f dir = new Vector3f(0, 0, 0);
 		
 		if(Input.getKey(Input.KEY_W) && !Input.getKey(Input.KEY_S)){
 			dir = dir.add(camera.getTransform().getRot().getForward().mul(new Vector3f(1, 0, 1)).normalized().mul(speedForward));

@@ -1,7 +1,6 @@
 package net.medox.puzzle;
 
 import net.medox.neonengine.audio.Listener;
-import net.medox.neonengine.components.FreeLook;
 import net.medox.neonengine.components.FullscreenSetter;
 import net.medox.neonengine.components.Lock2D;
 import net.medox.neonengine.components.MeshRenderer;
@@ -96,11 +95,11 @@ public class Puzzle extends Game{
 		playerHead.getTransform().setPos(0, /*0.75f*//*0.0125f*/0.7375f, 0);
 		Camera camera = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
 		playerHead.addComponent(camera);
-		FreeLook look = new FreeLook(0.15f);
-		playerHead.addComponent(look);
-		PlayerComponent playerComponent = new PlayerComponent(camera, shadow, shadowShow, shadowCooldown);
+		PlayerComponent playerComponent = new PlayerComponent(camera);
 		playerComponent.getController().setTransform(player.getTransform());
 		player.addComponent(playerComponent);
+		PlayerLook look = new PlayerLook(0.15f, shadow, shadowShow, shadowCooldown, playerComponent);
+		playerHead.addComponent(look);
 		Listener listener = new Listener();
 		playerHead.addComponent(listener);
 		player.addChild(playerHead);
