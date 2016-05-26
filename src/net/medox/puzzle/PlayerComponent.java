@@ -31,6 +31,7 @@ public class PlayerComponent extends EntityComponent{
 	private Progressbar shadowCooldownProgressbar;
 	
 	private Sound shadowSound;
+	private Sound shadowPlaceSound;
 	
 	public PlayerComponent(Camera camera, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
 		box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
@@ -62,6 +63,7 @@ public class PlayerComponent extends EntityComponent{
 		shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 		
 		shadowSound = new Sound("shadowStereo.wav");
+		shadowPlaceSound = new Sound("shadowPlaceStereo.wav");
 		
 		this.camera = camera;
 		this.shadow = shadow;
@@ -104,6 +106,8 @@ public class PlayerComponent extends EntityComponent{
 				shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 				
 				if(ray.hasHit()){
+					shadowPlaceSound.play();
+					
 					shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());
 					shadowSet = true;
 					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));

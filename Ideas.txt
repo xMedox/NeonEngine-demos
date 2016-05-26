@@ -1,6 +1,7 @@
 Time based puzzle(you have to activate a switch and teleport back to the exit to your shadow)
 You have to teleport over a bottomless pit with your shadow
 Shadow teleport animation
+Shadow place animation
 You should only be able to place shadows on the ground
 Trick enemies with your shadow
 Create a new skybox
