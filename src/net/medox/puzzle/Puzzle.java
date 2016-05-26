@@ -99,12 +99,11 @@ public class Puzzle extends Game{
 		FreeLook look = new FreeLook(0.15f);
 		playerHead.addComponent(look);
 		PlayerComponent playerComponent = new PlayerComponent(camera, shadow, shadowShow, shadowCooldown);
-		playerComponent.getBox().setTransform(player.getTransform());
+		playerComponent.getController().setTransform(player.getTransform());
 		player.addComponent(playerComponent);
 		Listener listener = new Listener();
 		playerHead.addComponent(listener);
 		player.addChild(playerHead);
-		
 		player.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker());
 		addEntity(player);
 		

@@ -7,7 +7,6 @@ import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Input;
 import net.medox.neonengine.core.Time;
-import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.physics.Box;
 import net.medox.neonengine.physics.CharacterController;
@@ -44,9 +43,9 @@ public class PlayerComponent extends EntityComponent{
 //		capsule.setFriction(0.5f);
 		box.setSleepingThresholds(0, 0);
 		
-		Transform t = new Transform();
-		t.setPos(new Vector3f(1, 10, 1));
-		box.setTransform(t);
+//		Transform t = new Transform();
+//		t.setPos(new Vector3f(1, 10, 1));
+//		box.setTransform(t);
 		
 		controller = new CharacterController(box, 0.05f);
 		
@@ -71,8 +70,8 @@ public class PlayerComponent extends EntityComponent{
 		this.shadowCooldown2D = shadowCooldown2D;
 	}
 	
-	public Box getBox(){
-		return box;
+	public CharacterController getController(){
+		return controller;
 	}
 	
 	@Override

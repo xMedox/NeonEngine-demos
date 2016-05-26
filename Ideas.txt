@@ -8,6 +8,7 @@ Create a new skybox
 Delete collision objects
 Save the level type(find exit(normal), escape lava, (escape?))
 Blocks that you cant place a shadw on
+Middle mouse button shows you the shadow(3rd person camera that you can rotate)
 
 First scene you find the shadow creator in a prision and escape
 A level where lava rises and you have to go and shadow up to avid it
