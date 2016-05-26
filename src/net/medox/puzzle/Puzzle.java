@@ -95,11 +95,11 @@ public class Puzzle extends Game{
 		playerHead.getTransform().setPos(0, /*0.75f*//*0.0125f*/0.7375f, 0);
 		Camera camera = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
 		playerHead.addComponent(camera);
-		PlayerComponent playerComponent = new PlayerComponent(camera);
+		PlayerComponent playerComponent = new PlayerComponent(0.15f, shadow, shadowShow, shadowCooldown);
 		playerComponent.getController().setTransform(player.getTransform());
-		player.addComponent(playerComponent);
-		PlayerLook look = new PlayerLook(0.15f, shadow, shadowShow, shadowCooldown, playerComponent);
-		playerHead.addComponent(look);
+		playerHead.addComponent(playerComponent);
+		PlayerUpdater playerUpdater = new PlayerUpdater(playerComponent);
+		player.addComponent(playerUpdater);
 		Listener listener = new Listener();
 		playerHead.addComponent(listener);
 		player.addChild(playerHead);
@@ -107,7 +107,7 @@ public class Puzzle extends Game{
 		addEntity(player);
 		
 		Entity handDelay = new Entity();
-		handDelay.addComponent(new DelayLook(look));
+		handDelay.addComponent(new DelayLook(playerComponent));
 		Entity hand = new Entity();
 		Material handMatterial = new Material();
 		handMatterial.setDiffuseMap(new Texture("shadow2.png", true));

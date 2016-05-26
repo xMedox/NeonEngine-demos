@@ -7,7 +7,7 @@ import net.medox.neonengine.math.Vector3f;
 public class DelayLook extends EntityComponent{
 	private static Quaternion quaternion = new Quaternion(new Vector3f(0, 0, 0), 0);
 	
-	private PlayerLook lock;
+	private PlayerComponent lock;
 	
 	public static final Vector3f yAxis = new Vector3f(0, 1, 0);
 	
@@ -25,19 +25,19 @@ public class DelayLook extends EntityComponent{
 	
 	private boolean invert;
 	
-	public DelayLook(PlayerLook lock){
+	public DelayLook(PlayerComponent lock){
 		this(lock, 40);
 	}
 	
-	public DelayLook(PlayerLook lock, float div){
+	public DelayLook(PlayerComponent lock, float div){
 		this(lock, div, false);
 	}
 	
-	public DelayLook(PlayerLook lock, boolean invert){
+	public DelayLook(PlayerComponent lock, boolean invert){
 		this(lock, 40, invert);
 	}
 	
-	public DelayLook(PlayerLook lock, float div, boolean invert){
+	public DelayLook(PlayerComponent lock, float div, boolean invert){
 		this.lock = lock;
 		this.div = div;
 		this.invert = invert;
