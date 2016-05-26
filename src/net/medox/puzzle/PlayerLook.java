@@ -23,6 +23,8 @@ public class PlayerLook extends EntityComponent{
 	
 	private PlayerComponent playerComponent;
 	
+	private boolean changed;
+	
 	private float shadowCooldown;
 	private float shadowTimer;
 	
@@ -56,7 +58,7 @@ public class PlayerLook extends EntityComponent{
 	public void input(float delta){
 		final Vector2f centerPosition = Window.getCenterPosition();
 		
-		boolean changed = false;
+		changed = false;
 		
 		if(Input.getKeyDown(Input.KEY_ESCAPE) && Input.isGrabbed()){
 			Input.setGrabbed(false);
@@ -145,11 +147,22 @@ public class PlayerLook extends EntityComponent{
 //				Input.setMousePosition(centerPosition);
 //			}
 		}
-		
+	}
+	
+	@Override
+	public void update(float delta){
 		if(Input.getMouse(Input.BUTTON_MIDDLE) && Input.isGrabbed() && !changed && shadowSet){
-			Vector3f pos = playerComponent.getController().getTransform().getTransformedPos();
-			Vector3f pos2 = shadow.getTransform().getTransformedPos().add(getTransform().getTransformedRot().getBack().mul(4));
-			getTransform().setPos(-pos.getX()+pos2.getX(), -pos.getY()+pos2.getY(), -pos.getZ()+pos2.getZ());
+			Ray ray = new Ray(shadow.getTransform().getTransformedPos(), shadow.getTransform().getTransformedPos().add(getTransform().getTransformedRot().getBack().mul(4)));
+			
+			if(ray.hasHit()){
+				Vector3f pos = playerComponent.getController().getTransform().getTransformedPos();
+				Vector3f pos2 = ray.getHitPoint().sub(getTransform().getTransformedRot().getBack().mul(0.02f));
+				getTransform().setPos(-pos.getX()+pos2.getX(), -pos.getY()+pos2.getY(), -pos.getZ()+pos2.getZ());
+			}else{
+				Vector3f pos = playerComponent.getController().getTransform().getTransformedPos();
+				Vector3f pos2 = shadow.getTransform().getTransformedPos().add(getTransform().getTransformedRot().getBack().mul(4));
+				getTransform().setPos(-pos.getX()+pos2.getX(), -pos.getY()+pos2.getY(), -pos.getZ()+pos2.getZ());
+			}
 			
 			shadowCamera = true;
 		}else{
