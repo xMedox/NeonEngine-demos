@@ -5,10 +5,10 @@ Shadow place animation
 You should only be able to place shadows on the ground
 Trick enemies with your shadow
 Create a new skybox
-Delete collision objects
+Delete collision objects(editor)
 Save the level type(find exit(normal), escape lava, (escape?))
-Blocks that you cant place a shadw on
-Middle mouse button shows you the shadow(3rd person camera that you can rotate)
+Blocks that you cant place a shadow on
+Use your shadow to see objects
 
 First scene you find the shadow creator in a prision and escape
 A level where lava rises and you have to go and shadow up to avid it
