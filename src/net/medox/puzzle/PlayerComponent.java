@@ -1,5 +1,6 @@
 package net.medox.puzzle;
 
+import net.medox.neonengine.audio.Sound;
 import net.medox.neonengine.components.Progressbar;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
@@ -28,6 +29,8 @@ public class PlayerComponent extends EntityComponent{
 	private boolean shadowSet;
 	private Entity2D shadowCooldown2D;
 	private Progressbar shadowCooldownProgressbar;
+	
+	private Sound shadowSound;
 	
 	public PlayerComponent(Camera camera, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
 		box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
@@ -58,6 +61,8 @@ public class PlayerComponent extends EntityComponent{
 		shadowCooldownProgressbar = new Progressbar(1, new Vector3f(0.46666666666f, 0.75686274509f, 1));
 		shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 		
+		shadowSound = new Sound("shadowStereo.wav");
+		
 		this.camera = camera;
 		this.shadow = shadow;
 		this.shadowShow = shadowShow;
@@ -77,25 +82,6 @@ public class PlayerComponent extends EntityComponent{
 	public void input(float delta){
 		float speed = 4;
 		float speedForward = 4;
-		
-//		if(Input.getKeyDown(Input.KEY_L)){
-//			Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getTransformedRot().getForward().mul(5)));
-//			
-//			if(ray.getHitCollider().equals(collider)){
-//				collider.activate(true);
-//				collider.applyCentralForce(camera.getTransform().getTransformedRot().getForward().mul(20));
-//			}
-//		}
-//		
-//		if(Input.getKeyDown(Input.KEY_K)){
-//			collider.setLinearVelocity(new Vector3f(0, 0, 0));
-//			collider.setAngularVelocity(new Vector3f(0, 0, 0));
-//		}
-		
-//		if(Input.getMouseDown(Input.BUTTON_MIDDLE)){
-//			audio.play();
-////			audio.setRolloffFactor(0.25f);
-//		}
 		
 		if(shadowTimer > 0){
 			shadowTimer -= delta;
@@ -126,6 +112,8 @@ public class PlayerComponent extends EntityComponent{
 		}
 		
 		if(Input.getMouseDown(Input.BUTTON_RIGHT) && Input.isGrabbed() && shadowSet){
+			shadowSound.play();
+			
 			controller.setPos(shadow.getTransform().getTransformedPos());
 			shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 			shadowSet = false;

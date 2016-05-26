@@ -116,7 +116,7 @@ public class Puzzle extends Game{
 		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
 		hand.addComponent(new MeshRenderer(new Mesh("Hand block.obj"), handMatterial));
 		hand.getTransform().setScale(0.5f);
-		hand.getTransform().setPos(0.75f, -0.5f, 1.1f);
+		hand.getTransform().setPos(0.75f, -0.45f, 1.1f);
 		handDelay.addChild(hand);
 		playerHead.addChild(handDelay);
 		
