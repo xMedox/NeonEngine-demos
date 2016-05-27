@@ -64,6 +64,8 @@ public class Puzzle extends Game{
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
 		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
+		RenderingEngine.setAmbiet(new Vector3f(0.2f, 0.2f, 0.2f));
+		
 		Entity2D shadowCooldown = new Entity2D();
 //		Lock2D shadowCooldownLock = new Lock2D(4, -31, new Vector2f(0, 1));
 		Lock2D shadowCooldownLock = new Lock2D(-60, -26, new Vector2f(0.5f, 0.5f));
@@ -110,8 +112,8 @@ public class Puzzle extends Game{
 		handDelay.addComponent(new DelayLook(playerComponent));
 		Entity hand = new Entity();
 		Material handMatterial = new Material();
-		handMatterial.setDiffuseMap(new Texture("shadow2.png", true));
-		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
+		handMatterial.setDiffuseMap(new Texture("block81.png", true));
+//		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
 		hand.addComponent(new MeshRenderer(new Mesh("Hand block.obj"), handMatterial));
 		hand.getTransform().setScale(0.5f);
 		hand.getTransform().setPos(0.75f, -0.45f, 1.1f);
