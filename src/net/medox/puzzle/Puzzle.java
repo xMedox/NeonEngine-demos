@@ -64,7 +64,7 @@ public class Puzzle extends Game{
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
 		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
-		RenderingEngine.setAmbiet(new Vector3f(0.2f, 0.2f, 0.2f));
+//		RenderingEngine.setAmbiet(new Vector3f(0.2f, 0.2f, 0.2f));
 		
 		Entity2D shadowCooldown = new Entity2D();
 //		Lock2D shadowCooldownLock = new Lock2D(4, -31, new Vector2f(0, 1));
