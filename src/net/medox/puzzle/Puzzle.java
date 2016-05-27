@@ -127,8 +127,8 @@ public class Puzzle extends Game{
 		
 		Mesh meshBlocks = new Mesh("PuzzleBlocks.obj");
 		Material materialBlocks = new Material();
-		materialBlocks.setDiffuseMap(new Texture("blocks.png", true));
-		materialBlocks.setEmissiveMap(new Texture("blocks_glow.png", true));
+		materialBlocks.setDiffuseMap(new Texture("blocksPuzzle.png", true));
+		materialBlocks.setEmissiveMap(new Texture("blocksEmissivePuzzle.png", true));
 		
 		Entity world = new Entity();
 		for(int x = 0; x < 3; x++){
