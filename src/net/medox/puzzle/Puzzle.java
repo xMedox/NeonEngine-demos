@@ -62,7 +62,7 @@ public class Puzzle extends Game{
 	@Override
 	public void init(){
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
-		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
+		RenderingEngine.setMainSkybox(new Skybox("sky.png", "sky.png", "skyTop.png", "skyBottom.png", "sky.png", "sky.png"));
 		
 		RenderingEngine.setAmbiet(new Vector3f(0.2f, 0.2f, 0.2f));
 		

@@ -9,6 +9,8 @@ Delete collision objects(editor)
 Save the level type(find exit(normal), escape lava, (escape?))
 Blocks that you cant place a shadow on
 Use your shadow to see objects
+The arrow should use the portal textures
+Objects that you can carry that you cant take with you if you use the shadow
 
 First scene you find the shadow creator in a prision and escape
 A level where lava rises and you have to go and shadow up to avid it
