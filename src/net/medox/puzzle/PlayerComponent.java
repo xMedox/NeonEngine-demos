@@ -115,20 +115,18 @@ public class PlayerComponent extends EntityComponent{
 			if(deltaPos.getY() == 0){
 				x = 0;
 			}else{
-				x = (float)-Math.toRadians(deltaPos.getY() * sensitivity);
+				float xSave = (float)-Math.toRadians(deltaPos.getY() * sensitivity);
 				
 //				float rot = Math.max(-57, Math.min(57, (float)Math.toDegrees(getTransform().getRot().getForward().getY()) + (float)Math.toDegrees(x)));
 				
-				float rot = 0;
-				
-				if(x > 0){
-					rot = Util.clamp(getTransform().getRot().getBack().getY() + x, -1.1f, 1f);
+				if(xSave > 0){
+					x = Util.clamp(getTransform().getRot().getBack().getY() + xSave, -1.1f, 1f);
 					
-					rot -= getTransform().getRot().getBack().getY();
+					x -= getTransform().getRot().getBack().getY();
 				}else{
-					rot = Util.clamp(getTransform().getRot().getBack().getY() + x, -1f, 1.1f);
+					x = Util.clamp(getTransform().getRot().getBack().getY() + xSave, -1f, 1.1f);
 					
-					rot -= getTransform().getRot().getBack().getY();
+					x -= getTransform().getRot().getBack().getY();
 				}
 				
 				
@@ -161,7 +159,7 @@ public class PlayerComponent extends EntityComponent{
 //					getTransform().rotate(getTransform().getRot().getRight(), x);
 //				}
 				
-				getTransform().rotate(getTransform().getRot().getRight(), rot);
+				getTransform().rotate(getTransform().getRot().getRight(), x);
 				
 				Input.setMousePosition(centerPosition);
 			}
@@ -255,18 +253,16 @@ public class PlayerComponent extends EntityComponent{
 					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 				}
 				
-				if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed() && !changed){
+				if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed() && !changed && ray.hasHit()){
 					shadowTimer = shadowCooldown;
 					
 					shadowCooldown2D.addComponent(shadowCooldownProgressbar);
 					
-					if(ray.hasHit()){
-						shadowPlaceSound.play();
-						
-						shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());
-						shadowSet = true;
-						shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
-					}
+					shadowPlaceSound.play();
+					
+					shadow.getTransform().setPos(shadowShow.getTransform().getTransformedPos());
+					shadowSet = true;
+					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 				}
 			}else{
 				shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
