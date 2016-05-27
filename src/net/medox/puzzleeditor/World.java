@@ -1,9 +1,5 @@
 package net.medox.puzzleeditor;
 
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -70,163 +66,155 @@ public class World extends EntityComponent{
 	}
 	
 	public void load(){
-		 try{
-	    	FileInputStream fstream = new FileInputStream("World/PuzzleBlocks.txt");
-	    	DataInputStream in = new DataInputStream(fstream);
-	    	BufferedReader br = new BufferedReader(new InputStreamReader(in));
-	    	String strLine = br.readLine();
-	    	
-	    	int x = 0;
-	    	int y = 0;
-	    	int z = 0;
+		List<String> text = Util.loadFromFile("World/PuzzleBlocks.txt");
 		
-	    	Pattern p = Pattern.compile(",");
-            String[] article2 = p.split(strLine);
+    	int x = 0;
+    	int y = 0;
+    	int z = 0;
+	
+    	Pattern p = Pattern.compile(",");
+        String[] article2 = p.split(text.get(0));
+    	
+    	for(int a2 = 0; a2 < article2.length; a2++){
+            String article = article2[a2];
+            
+	    	int test = Integer.parseInt(article);
 	    	
-	    	for(int a2 = 0; a2 < article2.length; a2++){
-                String article = article2[a2];
-                
-    	    	int test = Integer.parseInt(article);
-    	    	
-    	    	int a = -1;
-    	    	int b = -1;
-    	    	boolean solid = false;
-    	    	
-				if(test == 0){
-					a = -1;
-					b = 0;
-					
-					solid = false;
-				}else if(test == 1){
-					a = 0;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 2){
-					a = 1;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 3){
-					a = 2;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 4){
-					a = 3;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 5){
-					a = 4;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 6){
-					a = 5;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 7){
-					a = 6;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 8){
-					a = 7;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 9){
-					a = 8;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 10){
-					a = 9;
-					b = 0;
-					
-					solid = true;
-				}else if(test == 11){
-					a = 0;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 12){
-					a = 1;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 13){
-					a = 2;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 14){
-					a = 3;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 15){
-					a = 4;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 16){
-					a = 5;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 17){
-					a = 6;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 18){
-					a = 7;
-					b = 1;
-					
-					solid = true;
-				}else if(test == 19){
-					a = 8;
-					b = 1;
-					
-					solid = true;
-				}
-    	    	
-    	    	int[] ab = {a, b};
-    	    	
-    	    	blocks[x][y][z].texture = ab;
-    	    	blocks[x][y][z].solid = solid;
-        	    
-    	    	if(z < worldWidth){
-    	    		z ++;
+	    	int a = -1;
+	    	int b = -1;
+	    	boolean solid = false;
+	    	
+			if(test == 0){
+				a = -1;
+				b = 0;
+				
+				solid = false;
+			}else if(test == 1){
+				a = 0;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 2){
+				a = 1;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 3){
+				a = 2;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 4){
+				a = 3;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 5){
+				a = 4;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 6){
+				a = 5;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 7){
+				a = 6;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 8){
+				a = 7;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 9){
+				a = 8;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 10){
+				a = 9;
+				b = 0;
+				
+				solid = true;
+			}else if(test == 11){
+				a = 0;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 12){
+				a = 1;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 13){
+				a = 2;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 14){
+				a = 3;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 15){
+				a = 4;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 16){
+				a = 5;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 17){
+				a = 6;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 18){
+				a = 7;
+				b = 1;
+				
+				solid = true;
+			}else if(test == 19){
+				a = 8;
+				b = 1;
+				
+				solid = true;
+			}
+	    	
+	    	int[] ab = {a, b};
+	    	
+	    	blocks[x][y][z].texture = ab;
+	    	blocks[x][y][z].solid = solid;
+    	    
+	    	if(z < worldWidth){
+	    		z ++;
+	    	}
+
+	    	if(z == worldWidth){
+	    		z = 0;
+	    		
+      	    	if(y < worldHeight){
+    	    		y ++;
     	    	}
 
-    	    	if(z == worldWidth){
-    	    		z = 0;
+      	    	if(y == worldHeight){
+    	    		y = 0;
     	    		
-          	    	if(y < worldHeight){
-        	    		y ++;
+          	    	if(x < worldLenght){
+        	    		x ++;
         	    	}
 
-          	    	if(y == worldHeight){
-        	    		y = 0;
-        	    		
-              	    	if(x < worldLenght){
-            	    		x ++;
-            	    	}
-
-              	    	if(x == worldLenght){
-            	    		x = 0;
-            	    	}
+          	    	if(x == worldLenght){
+        	    		x = 0;
         	    	}
     	    	}
 	    	}
-	    	in.close();
-	    }catch (Exception e){
-	    	
-		}
+    	}
 	}
 	
 	public void save(){
@@ -258,34 +246,26 @@ public class World extends EntityComponent{
 	}
 	
 	public void loadCollision(){
-		try{
-	    	FileInputStream fstream = new FileInputStream("World/PuzzleBlocksCollision.txt");
-	    	DataInputStream in = new DataInputStream(fstream);
-	    	BufferedReader br = new BufferedReader(new InputStreamReader(in));
-	    	String strLine = br.readLine();
-	    	
-	    	Pattern p = Pattern.compile(";");
-            String[] article = p.split(strLine);
+		List<String> text = Util.loadFromFile("World/PuzzleBlocksCollision.txt");
+		
+    	Pattern p = Pattern.compile(";");
+        String[] article = p.split(text.get(0));
+        
+    	Pattern p2 = Pattern.compile(",");
+    	
+    	for(int a = 0; a < article.length; a++){
+            String[] article2 = p2.split(article[a]);
             
-	    	Pattern p2 = Pattern.compile(",");
-	    	
-	    	for(int a = 0; a < article.length; a++){
-                String[] article2 = p2.split(article[a]);
-                
-                int x = Integer.parseInt(article2[0]);
-                int y = Integer.parseInt(article2[1]);
-                int z = Integer.parseInt(article2[2]);
-                
-                int width = Integer.parseInt(article2[3]);
-                int height = Integer.parseInt(article2[4]);
-                int lenght = Integer.parseInt(article2[5]);
-                
-                collisionObjects.add(new CollisionObject(x, y, z, width, height, lenght));
-	    	}
-	    	in.close();
-	    }catch (Exception e1){
-	    	
-		}
+            int x = Integer.parseInt(article2[0]);
+            int y = Integer.parseInt(article2[1]);
+            int z = Integer.parseInt(article2[2]);
+            
+            int width = Integer.parseInt(article2[3]);
+            int height = Integer.parseInt(article2[4]);
+            int lenght = Integer.parseInt(article2[5]);
+            
+            collisionObjects.add(new CollisionObject(x, y, z, width, height, lenght));
+    	}
 	}
 	
 	public void saveCollision(){
