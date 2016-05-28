@@ -120,6 +120,11 @@ public class Puzzle extends Game{
 		handDelay.addChild(hand);
 		playerHead.addChild(handDelay);
 		
+		Entity cube = new Entity();
+		cube.addComponent(new CubeComponent());
+		cube.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
+		addEntity(cube);
+		
 		Entity directionalLightObject = new Entity();
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
 		directionalLightObject.addComponent(directionalLight);

@@ -39,6 +39,9 @@ public class PlayerComponent extends EntityComponent{
 	private Progressbar shadowCooldownProgressbar;
 	private boolean shadowCamera;
 	
+	private CubeComponent cube;
+	private boolean carrying;
+	
 	private Sound shadowSound;
 	private Sound shadowPlaceSound;
 	
@@ -244,16 +247,16 @@ public class PlayerComponent extends EntityComponent{
 		}else{
 			shadowCooldownProgressbar.removeSelf();
 			
-			if(!shadowCamera){
+			if(!shadowCamera && !carrying){
 				Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(8)));
 				
-				if(ray.hasHit()){
+				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0){
 					shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
 				}else{
 					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 				}
 				
-				if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed() && !changed && ray.hasHit()){
+				if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed() && !changed && ray.hasHit() && ray.getHitCollider().getGroup() == 0){
 					shadowTimer = shadowCooldown;
 					
 					shadowCooldown2D.addComponent(shadowCooldownProgressbar);
@@ -272,9 +275,71 @@ public class PlayerComponent extends EntityComponent{
 		if(Input.getMouseDown(Input.BUTTON_RIGHT) && Input.isGrabbed() && !changed && shadowSet){
 			shadowSound.play();
 			
+			if(carrying){
+				carrying = false;
+				
+				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
+				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
+				
+				cube.getBox().activate(true);
+			}
+			
 			controller.setPos(shadow.getTransform().getTransformedPos());
 			shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 			shadowSet = false;
+		}
+		
+		boolean carryChanged = false;
+		
+		if(Input.getKeyDown(Input.KEY_E) && !carrying){
+			Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
+			
+			if(ray.hasHit() && ray.getHitCollider().getGroup() == 1){
+				cube = (CubeComponent)ray.getHitCollider().getObject();
+				
+				carrying = true;
+				carryChanged = true;
+			}
+		}
+		
+		if(carrying){
+			cube.getBox().activate(true);
+			
+//			cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
+			cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
+			
+//			cube.getBox().setPos(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
+//			cube.getBox().setRot(getTransform().getTransformedRot());
+			
+			Ray ray = new Ray(cube.getBox().getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
+			
+			if(ray.hasHit()){
+//				Vector3f dir = getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(cube.getBox().getTransform().getTransformedPos());
+				
+				cube.getBox().setLinearVelocity(ray.getHitPoint()/*.sub(dir.mul(0.5f))*/.sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
+			}else{
+				cube.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
+			}
+			
+			if(Input.getKeyDown(Input.KEY_E) && !carryChanged){
+				carrying = false;
+				
+				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
+				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
+				
+				cube.getBox().activate(true);
+			}
+			
+			Vector3f dir = getTransform().getTransformedPos().sub(cube.getBox().getTransform().getTransformedPos());
+			
+			if(dir.length() >= 4){
+				carrying = false;
+				
+				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
+				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
+				
+				cube.getBox().activate(true);
+			}
 		}
 	}
 	
