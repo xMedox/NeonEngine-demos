@@ -125,6 +125,11 @@ public class Puzzle extends Game{
 		cube.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
 		addEntity(cube);
 		
+//		Entity cube2 = new Entity();
+//		cube2.addComponent(new CubeComponent());
+//		cube2.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
+//		addEntity(cube2);
+		
 		Entity directionalLightObject = new Entity();
 		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
 		directionalLightObject.addComponent(directionalLight);

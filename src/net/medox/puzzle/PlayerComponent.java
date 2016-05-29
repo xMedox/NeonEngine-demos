@@ -314,9 +314,13 @@ public class PlayerComponent extends EntityComponent{
 			Ray ray = new Ray(cube.getBox().getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
 			
 			if(ray.hasHit()){
-				Vector3f dir = cube.getBox().getTransform().getTransformedPos().sub(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
-				
-				cube.getBox().setLinearVelocity(ray.getHitPoint().add(dir.normalized().mul(0.51f)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
+				if(cube.getBox().getTransform().getTransformedPos().sub(ray.getHitPoint()).length() >= 0.65f){
+					cube.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
+				}else{
+					Vector3f dir = cube.getBox().getTransform().getTransformedPos().sub(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
+					
+					cube.getBox().setLinearVelocity(ray.getHitPoint().add(dir.normalized().mul(0.51f)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
+				}
 			}else{
 				cube.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
 			}
