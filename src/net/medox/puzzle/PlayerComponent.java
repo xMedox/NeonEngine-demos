@@ -248,15 +248,43 @@ public class PlayerComponent extends EntityComponent{
 			shadowCooldownProgressbar.removeSelf();
 			
 			if(!shadowCamera && !carrying){
+				boolean creatable = false;
+				
 				Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(8)));
 				
 				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0){
-					shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0)));
+					
+					if(!ray1.hasHit()){
+						Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0)));
+						
+						if(!ray2.hasHit()){
+							Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(0, 0.00001f, 0.5f)));
+							
+							if(!ray3.hasHit()){
+								Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(0, 0.00001f, 0.5f)), ray.getHitPoint().add(new Vector3f(0, 0.00001f, -0.5f)));
+								
+								if(!ray4.hasHit()){
+									creatable = true;
+									
+									shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+								}else{
+									shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
+								}
+							}else{
+								shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
+							}
+						}else{
+							shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
+						}
+					}else{
+						shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
+					}
 				}else{
 					shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 				}
 				
-				if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed() && !changed && ray.hasHit() && ray.getHitCollider().getGroup() == 0){
+				if(Input.getMouseDown(Input.BUTTON_LEFT) && Input.isGrabbed() && !changed && creatable){
 					shadowTimer = shadowCooldown;
 					
 					shadowCooldown2D.addComponent(shadowCooldownProgressbar);
@@ -277,6 +305,8 @@ public class PlayerComponent extends EntityComponent{
 			
 			if(carrying){
 				carrying = false;
+				
+				cube.getBox().setGravity(PhysicsEngine.getGravity());
 				
 				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
 				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
@@ -305,6 +335,8 @@ public class PlayerComponent extends EntityComponent{
 		if(carrying){
 			cube.getBox().activate(true);
 			
+			cube.getBox().setGravity(0);
+			
 //			cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
 			cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
 			
@@ -328,6 +360,8 @@ public class PlayerComponent extends EntityComponent{
 			if(Input.getKeyDown(Input.KEY_E) && !carryChanged){
 				carrying = false;
 				
+				cube.getBox().setGravity(PhysicsEngine.getGravity());
+				
 				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
 				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
 				
@@ -338,6 +372,8 @@ public class PlayerComponent extends EntityComponent{
 			
 			if(dir.length() >= 4){
 				carrying = false;
+				
+				cube.getBox().setGravity(PhysicsEngine.getGravity());
 				
 				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
 				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
