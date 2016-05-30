@@ -304,14 +304,7 @@ public class PlayerComponent extends EntityComponent{
 			shadowSound.play();
 			
 			if(carrying){
-				carrying = false;
-				
-				cube.getBox().setGravity(PhysicsEngine.getGravity());
-				
-				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
-				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
-				
-				cube.getBox().activate(true);
+				dropCube();
 			}
 			
 			controller.setPos(shadow.getTransform().getTransformedPos());
@@ -358,29 +351,26 @@ public class PlayerComponent extends EntityComponent{
 			}
 			
 			if(Input.getKeyDown(Input.KEY_E) && !carryChanged){
-				carrying = false;
-				
-				cube.getBox().setGravity(PhysicsEngine.getGravity());
-				
-				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
-				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
-				
-				cube.getBox().activate(true);
+				dropCube();
 			}
 			
 			Vector3f dir = getTransform().getTransformedPos().sub(cube.getBox().getTransform().getTransformedPos());
 			
 			if(dir.length() >= 4){
-				carrying = false;
-				
-				cube.getBox().setGravity(PhysicsEngine.getGravity());
-				
-				cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
-				cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
-				
-				cube.getBox().activate(true);
+				dropCube();
 			}
 		}
+	}
+	
+	public void dropCube(){
+		carrying = false;
+		
+		cube.getBox().setGravity(PhysicsEngine.getGravity());
+		
+		cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
+		cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
+		
+		cube.getBox().activate(true);
 	}
 	
 	public float getX(){
