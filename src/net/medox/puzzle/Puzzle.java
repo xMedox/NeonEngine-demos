@@ -121,8 +121,9 @@ public class Puzzle extends Game{
 		playerHead.addChild(handDelay);
 		
 		Entity cube = new Entity();
-		cube.addComponent(new CubeComponent());
+		cube.addComponent(new KeyComponent());
 		cube.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
+		cube.getTransform().setScale(0.25f);
 		addEntity(cube);
 		
 //		Entity cube2 = new Entity();

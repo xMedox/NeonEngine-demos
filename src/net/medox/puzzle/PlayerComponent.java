@@ -39,7 +39,7 @@ public class PlayerComponent extends EntityComponent{
 	private Progressbar shadowCooldownProgressbar;
 	private boolean shadowCamera;
 	
-	private CubeComponent cube;
+	private KeyComponent key;
 	private boolean carrying;
 	
 	private Sound shadowSound;
@@ -253,16 +253,16 @@ public class PlayerComponent extends EntityComponent{
 				Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(8)));
 				
 				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0){
-					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0)));
+					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0.5f)));
 					
 					if(!ray1.hasHit()){
-						Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0)));
+						Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0.5f)));
 						
 						if(!ray2.hasHit()){
-							Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(0, 0.00001f, 0.5f)));
+							Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, -0.5f)));
 							
 							if(!ray3.hasHit()){
-								Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(0, 0.00001f, 0.5f)), ray.getHitPoint().add(new Vector3f(0, 0.00001f, -0.5f)));
+								Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, -0.5f)));
 								
 								if(!ray4.hasHit()){
 									creatable = true;
@@ -318,7 +318,9 @@ public class PlayerComponent extends EntityComponent{
 			Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
 			
 			if(ray.hasHit() && ray.getHitCollider().getGroup() == 1){
-				cube = (CubeComponent)ray.getHitCollider().getObject();
+				key = (KeyComponent)ray.getHitCollider().getObject();
+				
+				key.remove();
 				
 				carrying = true;
 				carryChanged = true;
@@ -326,51 +328,62 @@ public class PlayerComponent extends EntityComponent{
 		}
 		
 		if(carrying){
-			cube.getBox().activate(true);
+//			key.getBox().activate(true);
+//			
+//			key.getBox().setGravity(0);
+//			
+////			cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
+//			key.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
+//			
+////			cube.getBox().setPos(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
+////			cube.getBox().setRot(getTransform().getTransformedRot());
+//			
+////			Ray ray = new Ray(key.getBox().getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
+////			
+////			if(ray.hasHit()){
+////				if(key.getBox().getTransform().getTransformedPos().sub(ray.getHitPoint()).length() >= 0.65f){
+////					key.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(key.getBox().getTransform().getTransformedPos()).mul(15));
+////				}else{
+////					Vector3f dir = key.getBox().getTransform().getTransformedPos().sub(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
+////					
+////					key.getBox().setLinearVelocity(ray.getHitPoint().add(dir.normalized().mul(0.51f)).sub(key.getBox().getTransform().getTransformedPos()).mul(15));
+////				}
+////			}else{
+//				key.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(key.getBox().getTransform().getTransformedPos()).mul(15));
+////			}
 			
-			cube.getBox().setGravity(0);
+			Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(2f)));
+//			Ray ray1 = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().add(getTransform().getRot().getForward().mul(new Vector3f(0.125f, 0, 0))).mul(2f)));
+//			Ray ray2 = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().add(getTransform().getRot().getForward().mul(new Vector3f(-0.125f, 0, 0))).mul(2f)));
+//			Ray ray3 = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().add(getTransform().getRot().getForward().mul(new Vector3f(0, 0, 0.125f))).mul(2f)));
+//			Ray ray4 = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().add(getTransform().getRot().getForward().mul(new Vector3f(0, 0, -0.125f))).mul(2f)));
 			
-//			cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
-			cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
-			
-//			cube.getBox().setPos(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
-//			cube.getBox().setRot(getTransform().getTransformedRot());
-			
-			Ray ray = new Ray(cube.getBox().getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
-			
-			if(ray.hasHit()){
-				if(cube.getBox().getTransform().getTransformedPos().sub(ray.getHitPoint()).length() >= 0.65f){
-					cube.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
-				}else{
-					Vector3f dir = cube.getBox().getTransform().getTransformedPos().sub(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3.5f)));
-					
-					cube.getBox().setLinearVelocity(ray.getHitPoint().add(dir.normalized().mul(0.51f)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
-				}
+			if(ray.hasHit()/* || ray1.hasHit() || ray2.hasHit() || ray3.hasHit() || ray4.hasHit()*/){
+				key.getTransform().setPos(ray.getHitPoint().sub(getTransform().getRot().getForward().mul(0.125f)));
 			}else{
-				cube.getBox().setLinearVelocity(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)).sub(cube.getBox().getTransform().getTransformedPos()).mul(15));
+				key.getTransform().setPos(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(/*0.125f*/2)));
 			}
+			
+			key.getTransform().setRot(getTransform().getTransformedRot());
 			
 			if(Input.getKeyDown(Input.KEY_E) && !carryChanged){
 				dropCube();
 			}
 			
-			Vector3f dir = getTransform().getTransformedPos().sub(cube.getBox().getTransform().getTransformedPos());
-			
-			if(dir.length() >= 4){
-				dropCube();
-			}
+//			Vector3f dir = getTransform().getTransformedPos().sub(key.getTransform().getTransformedPos());
+//			
+//			if(dir.length() >= 3){
+//				dropCube();
+//			}
 		}
 	}
 	
 	public void dropCube(){
 		carrying = false;
 		
-		cube.getBox().setGravity(PhysicsEngine.getGravity());
+		key.add();
 		
-		cube.getBox().setLinearVelocity(new Vector3f(0, 0, 0));
-		cube.getBox().setAngularVelocity(new Vector3f(0, 0, 0));
-		
-		cube.getBox().activate(true);
+		key.getController().setTransform(key.getTransform());
 	}
 	
 	public float getX(){
