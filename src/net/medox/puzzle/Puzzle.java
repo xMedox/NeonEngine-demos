@@ -10,11 +10,9 @@ import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;
 import net.medox.neonengine.core.NeonEngine;
-import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector2f;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.rendering.Camera;
-import net.medox.neonengine.rendering.DirectionalLight;
 import net.medox.neonengine.rendering.Font;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
@@ -27,7 +25,7 @@ public class Puzzle extends Game{
 	public static void main(String[] args){
 //		NeonEngine.OPTION_ENABLE_VSYNC = 0;
 //		NeonEngine.OPTION_ENABLE_FXAA = 0;
-//		NeonEngine.OPTION_ENABLE_SHADOWS = 1;
+//		NeonEngine.OPTION_ENABLE_SHADOWS = 0;
 //		NeonEngine.OPTION_ENABLE_2D = 1;
 //		NeonEngine.OPTION_ENABLE_PARTICLES = 0;
 //		NeonEngine.OPTION_ENABLE_BLOOM = 1;
@@ -38,7 +36,7 @@ public class Puzzle extends Game{
 		
 		NeonEngine.OPTION_ENABLE_VSYNC = 1;
 		NeonEngine.OPTION_ENABLE_FXAA = 0;
-		NeonEngine.OPTION_ENABLE_SHADOWS = 1;
+		NeonEngine.OPTION_ENABLE_SHADOWS = 0;
 		NeonEngine.OPTION_ENABLE_2D = 1;
 		NeonEngine.OPTION_ENABLE_PARTICLES = 0;
 		NeonEngine.OPTION_ENABLE_BLOOM = 1;
@@ -76,7 +74,7 @@ public class Puzzle extends Game{
 		Entity shadow = new Entity();
 		Material shadowMatterial = new Material();
 		shadowMatterial.setDiffuseMap(new Texture("shadow2.png", true));
-		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
+		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive2.png", true));
 		shadow.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowMatterial));
 		shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 		shadow.getTransform().setScale(new Vector3f(1, 2, 1));
@@ -112,36 +110,39 @@ public class Puzzle extends Game{
 		handDelay.addComponent(new DelayLook(playerComponent));
 		Entity hand = new Entity();
 		Material handMatterial = new Material();
-		handMatterial.setDiffuseMap(new Texture("block81.png", true));
-//		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
+		handMatterial.setDiffuseMap(new Texture("shadow2.png", true));
+		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive2.png", true));
 		hand.addComponent(new MeshRenderer(new Mesh("Hand block.obj"), handMatterial));
 		hand.getTransform().setScale(0.5f);
 		hand.getTransform().setPos(0.75f, -0.45f, 1.1f);
 		handDelay.addChild(hand);
 		playerHead.addChild(handDelay);
 		
-		Entity cube = new Entity();
-		cube.addComponent(new KeyComponent());
-		cube.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
-		cube.getTransform().setScale(0.25f);
-		addEntity(cube);
+		Entity key = new Entity();
+		key.addComponent(new KeyComponent());
+		Material redKeyMatterial = new Material();
+		redKeyMatterial.setDiffuseMap(new Texture("redKey.png", true));
+		redKeyMatterial.setEmissiveMap(new Texture("white.png", true));
+		key.addComponent(new MeshRenderer(new Mesh("block.obj"), redKeyMatterial));
+		key.getTransform().setScale(0.25f);
+		addEntity(key);
 		
 //		Entity cube2 = new Entity();
 //		cube2.addComponent(new CubeComponent());
 //		cube2.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowShowMatterial));
 //		addEntity(cube2);
 		
-		Entity directionalLightObject = new Entity();
-		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
-		directionalLightObject.addComponent(directionalLight);
-		directionalLightObject.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float)Math.toRadians(-45)));
-		directionalLightObject.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(45));
-		addEntity(directionalLightObject);
+//		Entity directionalLightObject = new Entity();
+//		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
+//		directionalLightObject.addComponent(directionalLight);
+//		directionalLightObject.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float)Math.toRadians(-45)));
+//		directionalLightObject.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(45));
+//		addEntity(directionalLightObject);
 		
 		Mesh meshBlocks = new Mesh("PuzzleBlocks.obj");
 		Material materialBlocks = new Material();
-		materialBlocks.setDiffuseMap(new Texture("blocksPuzzle.png", true));
-		materialBlocks.setEmissiveMap(new Texture("blocksEmissivePuzzle.png", true));
+		materialBlocks.setDiffuseMap(new Texture("blocksPuzzle2.png", true));
+		materialBlocks.setEmissiveMap(new Texture("blocksEmissivePuzzle2.png", true));
 		
 		Entity world = new Entity();
 		for(int x = 0; x < 3; x++){

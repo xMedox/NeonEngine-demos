@@ -320,6 +320,8 @@ public class PlayerComponent extends EntityComponent{
 			if(ray.hasHit() && ray.getHitCollider().getGroup() == 1){
 				key = (KeyComponent)ray.getHitCollider().getObject();
 				
+				key.getTransform().setRot(key.getController().getRot());
+				
 				key.remove();
 				
 				carrying = true;
@@ -364,7 +366,7 @@ public class PlayerComponent extends EntityComponent{
 				key.getTransform().setPos(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(/*0.125f*/2)));
 			}
 			
-			key.getTransform().setRot(getTransform().getTransformedRot());
+//			key.getTransform().setRot(getTransform().getTransformedRot());
 			
 			if(Input.getKeyDown(Input.KEY_E) && !carryChanged){
 				dropCube();
