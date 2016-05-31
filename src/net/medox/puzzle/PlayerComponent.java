@@ -252,7 +252,7 @@ public class PlayerComponent extends EntityComponent{
 				
 				Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(8)));
 				
-				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0){
+				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0 && ray.getHitNormal().getY() >= 0.95f){
 					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0.5f)));
 					
 					if(!ray1.hasHit()){
@@ -361,7 +361,7 @@ public class PlayerComponent extends EntityComponent{
 //			Ray ray4 = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().add(getTransform().getRot().getForward().mul(new Vector3f(0, 0, -0.125f))).mul(2f)));
 			
 			if(ray.hasHit()/* || ray1.hasHit() || ray2.hasHit() || ray3.hasHit() || ray4.hasHit()*/){
-				key.getTransform().setPos(ray.getHitPoint().sub(getTransform().getRot().getForward().mul(0.125f)));
+				key.getTransform().setPos(ray.getHitPoint().add(ray.getHitNormal().mul(0.125f)));
 			}else{
 				key.getTransform().setPos(getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(/*0.125f*/2)));
 			}
