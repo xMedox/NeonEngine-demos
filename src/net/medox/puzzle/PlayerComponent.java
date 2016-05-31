@@ -19,7 +19,6 @@ import net.medox.neonengine.rendering.Window;
 public class PlayerComponent extends EntityComponent{
 	public static final Vector3f Y_AXIS = new Vector3f(0, 1, 0);
 	
-	private Box box;
 	private CharacterController controller;
 	
 	private float sensitivity;
@@ -46,7 +45,7 @@ public class PlayerComponent extends EntityComponent{
 	private Sound shadowPlaceSound;
 	
 	public PlayerComponent(float sensitivity, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
-		box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
+		Box box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
 		
 //		capsule.setMassProps(2.5f, new Vector3f(0, 0, 0));
 		box.setMassProps(2.5f);
