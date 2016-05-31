@@ -95,7 +95,7 @@ public class Puzzle extends Game{
 		playerHead.getTransform().setPos(0, /*0.75f*//*0.0125f*/0.7375f, 0);
 		Camera camera = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
 		playerHead.addComponent(camera);
-		PlayerComponent playerComponent = new PlayerComponent(0.15f, shadow, shadowShow, shadowCooldown);
+		PlayerComponent playerComponent = new PlayerComponent(0.15f, false, shadow, shadowShow, shadowCooldown);
 		playerComponent.getController().setTransform(player.getTransform());
 		playerHead.addComponent(playerComponent);
 		PlayerUpdater playerUpdater = new PlayerUpdater(playerComponent);

@@ -22,6 +22,7 @@ public class PlayerComponent extends EntityComponent{
 	private CharacterController controller;
 	
 	private float sensitivity;
+	private boolean invertY;
 	
 	private float x;
 	private float y;
@@ -44,7 +45,7 @@ public class PlayerComponent extends EntityComponent{
 	private Sound shadowSound;
 	private Sound shadowPlaceSound;
 	
-	public PlayerComponent(float sensitivity, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
+	public PlayerComponent(float sensitivity, boolean invertY, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
 		Box box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
 		
 //		capsule.setMassProps(2.5f, new Vector3f(0, 0, 0));
@@ -77,6 +78,7 @@ public class PlayerComponent extends EntityComponent{
 		shadowPlaceSound = new Sound("shadowPlaceStereo.wav");
 		
 		this.sensitivity = sensitivity;
+		this.invertY = invertY;
 		this.shadow = shadow;
 		this.shadowShow = shadowShow;
 		this.shadowCooldown2D = shadowCooldown2D;
@@ -117,7 +119,13 @@ public class PlayerComponent extends EntityComponent{
 			if(deltaPos.getY() == 0){
 				x = 0;
 			}else{
-				float xSave = (float)-Math.toRadians(deltaPos.getY() * sensitivity);
+				float xSave = 0;
+				
+				if(invertY){
+					xSave = (float)Math.toRadians(deltaPos.getY() * sensitivity);
+				}else{
+					xSave = (float)-Math.toRadians(deltaPos.getY() * sensitivity);
+				}
 				
 //				float rot = Math.max(-57, Math.min(57, (float)Math.toDegrees(getTransform().getRot().getForward().getY()) + (float)Math.toDegrees(x)));
 				

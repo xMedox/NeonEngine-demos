@@ -14,7 +14,7 @@ public class KeyComponent extends EntityComponent{
 	public KeyComponent(){
 		Box box = new Box(new Vector3f(0.125f, 0.125f, 0.125f));
 		
-		box.setMassProps(0.00000001f);
+		box.setMassProps(0.5f);
 		
 		box.setPos(new Vector3f(7, 10, 7));
 		
