@@ -76,7 +76,7 @@ public class Puzzle extends Game{
 		Entity shadow = new Entity();
 		Material shadowMatterial = new Material();
 		shadowMatterial.setDiffuseMap(new Texture("shadow2.png", true));
-		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive2.png", true));
+		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
 		shadow.addComponent(new MeshRenderer(new Mesh("block.obj"), shadowMatterial));
 		shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 		shadow.getTransform().setScale(new Vector3f(1, 2, 1));
@@ -113,7 +113,7 @@ public class Puzzle extends Game{
 		Entity hand = new Entity();
 		Material handMatterial = new Material();
 		handMatterial.setDiffuseMap(new Texture("shadow2.png", true));
-		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive2.png", true));
+		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
 		hand.addComponent(new MeshRenderer(new Mesh("Hand block.obj"), handMatterial));
 		hand.getTransform().setScale(0.5f);
 		hand.getTransform().setPos(0.75f, -0.45f, 1.1f);
@@ -123,11 +123,20 @@ public class Puzzle extends Game{
 		Entity key = new Entity();
 		key.addComponent(new KeyComponent());
 		Material redKeyMatterial = new Material();
-		redKeyMatterial.setDiffuseMap(new Texture("redKey.png", true));
+		redKeyMatterial.setDiffuseMap(new Texture("redKey2.png", true));
 		redKeyMatterial.setEmissiveMap(new Texture("white.png", true));
 		key.addComponent(new MeshRenderer(new Mesh("block.obj"), redKeyMatterial));
 		key.getTransform().setScale(0.25f);
 		addEntity(key);
+		
+		Entity key2 = new Entity();
+		key2.addComponent(new KeyComponent());
+		Material blueKeyMatterial = new Material();
+		blueKeyMatterial.setDiffuseMap(new Texture("blueKey2.png", true));
+		blueKeyMatterial.setEmissiveMap(new Texture("white.png", true));
+		key2.addComponent(new MeshRenderer(new Mesh("block.obj"), blueKeyMatterial));
+		key2.getTransform().setScale(0.25f);
+		addEntity(key2);
 		
 //		Entity cube2 = new Entity();
 //		cube2.addComponent(new CubeComponent());
