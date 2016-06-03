@@ -5,7 +5,6 @@ import net.medox.neonengine.components.FullscreenSetter;
 import net.medox.neonengine.components.Lock2D;
 import net.medox.neonengine.components.MeshRenderer;
 import net.medox.neonengine.components.MeshRenderer2D;
-import net.medox.neonengine.components.MeshRendererNoShadow;
 import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
@@ -77,8 +76,8 @@ public class Puzzle extends Game{
 		Entity shadow = new Entity();
 		Material shadowMatterial = new Material();
 		shadowMatterial.setDiffuseMap(new Texture("shadow2.png", true));
-		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
-		shadow.addComponent(new MeshRendererNoShadow(new Mesh("block.obj"), shadowMatterial));
+		shadowMatterial.setEmissiveMap(new Texture("whiteSwordEmissive2.png", true));
+		shadow.addComponent(new MeshRendererShadow(new Mesh("block.obj"), shadowMatterial));
 		shadow.getTransform().setPos(new Vector3f(0, -100000, 0));
 		shadow.getTransform().setScale(new Vector3f(1, 2, 1));
 		addEntity(shadow);
@@ -87,7 +86,7 @@ public class Puzzle extends Game{
 		Material shadowShowMatterial = new Material();
 		shadowShowMatterial.setDiffuseMap(new Texture("shadowShow.png", true));
 		shadowShowMatterial.setEmissiveMap(new Texture("white.png", true));
-		shadowShow.addComponent(new MeshRendererNoShadow(new Mesh("block.obj"), shadowShowMatterial));
+		shadowShow.addComponent(new MeshRendererShadow(new Mesh("block.obj"), shadowShowMatterial));
 		shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 		shadowShow.getTransform().setScale(new Vector3f(1, 2, 1));
 		addEntity(shadowShow);
@@ -114,8 +113,8 @@ public class Puzzle extends Game{
 		Entity hand = new Entity();
 		Material handMatterial = new Material();
 		handMatterial.setDiffuseMap(new Texture("shadow2.png", true));
-		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive.png", true));
-		hand.addComponent(new MeshRendererNoShadow(new Mesh("Hand block.obj"), handMatterial));
+		handMatterial.setEmissiveMap(new Texture("whiteSwordEmissive2.png", true));
+		hand.addComponent(new MeshRendererShadow(new Mesh("Hand block.obj"), handMatterial));
 		hand.getTransform().setScale(0.5f);
 		hand.getTransform().setPos(0.75f, -0.45f, 1.1f);
 		handDelay.addChild(hand);
@@ -126,7 +125,7 @@ public class Puzzle extends Game{
 		Material redKeyMatterial = new Material();
 		redKeyMatterial.setDiffuseMap(new Texture("redKey2.png", true));
 		redKeyMatterial.setEmissiveMap(new Texture("white.png", true));
-		key.addComponent(new MeshRendererNoShadow(new Mesh("block.obj"), redKeyMatterial));
+		key.addComponent(new MeshRendererShadow(new Mesh("block.obj"), redKeyMatterial));
 		key.getTransform().setScale(0.25f);
 		addEntity(key);
 		
@@ -135,7 +134,7 @@ public class Puzzle extends Game{
 		Material blueKeyMatterial = new Material();
 		blueKeyMatterial.setDiffuseMap(new Texture("blueKey2.png", true));
 		blueKeyMatterial.setEmissiveMap(new Texture("white.png", true));
-		key2.addComponent(new MeshRendererNoShadow(new Mesh("block.obj"), blueKeyMatterial));
+		key2.addComponent(new MeshRendererShadow(new Mesh("block.obj"), blueKeyMatterial));
 		key2.getTransform().setScale(0.25f);
 		addEntity(key2);
 		
