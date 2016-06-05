@@ -259,17 +259,17 @@ public class PlayerComponent extends EntityComponent{
 				
 				Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(8)));
 				
-				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0 && ray.getHitNormal().getY() >= 0.95f){
-					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0.5f)));
+				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0 && ray.getHitNormal().getY() >= 0.5f){
+					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, -0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, 0.5f)));
 					
 					if(!ray1.hasHit()){
-						Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, -0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0.5f)));
+						Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, -0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, 0.5f)));
 						
 						if(!ray2.hasHit()){
-							Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, 0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, -0.5f)));
+							Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, 0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, -0.5f)));
 							
 							if(!ray3.hasHit()){
-								Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.00001f, 0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.00001f, -0.5f)));
+								Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, 0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, -0.5f)));
 								
 								if(!ray4.hasHit()){
 									creatable = true;
