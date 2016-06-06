@@ -144,9 +144,9 @@ public class Puzzle extends Game{
 //		addEntity(cube2);
 		
 		Entity directionalLightObject = new Entity();
-		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.7f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
+		DirectionalLight directionalLight = new DirectionalLight(new Vector3f(1, 1, 1), 0.6f, 10, /*8.0f*/16.0f, 1.0f, /*0.7f*/0.2f, 0.000001f);
 		directionalLightObject.addComponent(directionalLight);
-		directionalLightObject.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float)Math.toRadians(-45)));
+		directionalLightObject.getTransform().setRot(new Quaternion(new Vector3f(1, 0, 0), (float)Math.toRadians(-50)));
 		directionalLightObject.getTransform().rotate(new Vector3f(0, 1, 0), (float)Math.toRadians(45));
 		addEntity(directionalLightObject);
 		
