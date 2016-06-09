@@ -47,7 +47,9 @@ public class PuzzleEditor extends Game{
 	@Override
 	public void init(){
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
-		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
+		RenderingEngine.setMainSkybox(new Skybox("skyTest.png", "skyTest.png", "skyTopTest.png", "skyBottomTest.png", "skyTest.png", "skyTest.png"));
+		
+		RenderingEngine.setAmbiet(new Vector3f(0.2f, 0.2f, 0.2f));
 		
 		Entity changeMode = new Entity();
 		changeMode.addComponent(new FullscreenSetter()).addComponent(new ScreenshotTaker());
