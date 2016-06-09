@@ -764,7 +764,7 @@ public class World extends EntityComponent{
 				selectedTexture = new int[]{8, 1};
 			}
 			
-			if(Input.getMouseWheelValue() == Input.WHEEL_UP){
+			if(Input.isMouseWheelDirection(Input.WHEEL_UP)){
 				if(selectedTexture[0] == 8 && selectedTexture[1] == 1){
 					
 				}else{
@@ -774,7 +774,7 @@ public class World extends EntityComponent{
 						selectedTexture = new int[]{selectedTexture[0]+1, selectedTexture[1]};
 					}
 				}
-			}else if(Input.getMouseWheelValue() == Input.WHEEL_DOWN){
+			}else if(Input.isMouseWheelDirection(Input.WHEEL_DOWN)){
 				if(selectedTexture[0] == 0 && selectedTexture[1] == 0){
 					
 				}else{
