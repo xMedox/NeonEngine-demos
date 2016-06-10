@@ -10,7 +10,7 @@ import net.medox.neonengine.core.Time;
 import net.medox.neonengine.core.Util;
 import net.medox.neonengine.math.Vector2f;
 import net.medox.neonengine.math.Vector3f;
-import net.medox.neonengine.physics.Box;
+import net.medox.neonengine.physics.BoxCollider;
 import net.medox.neonengine.physics.CharacterController;
 import net.medox.neonengine.physics.PhysicsEngine;
 import net.medox.neonengine.physics.Ray;
@@ -46,7 +46,7 @@ public class PlayerComponent extends EntityComponent{
 	private Sound shadowPlaceSound;
 	
 	public PlayerComponent(float sensitivity, boolean invertY, Entity shadow, Entity shadowShow, Entity2D shadowCooldown2D){
-		Box box = new Box(new Vector3f(0.475f, 0.975f, 0.475f));
+		BoxCollider box = new BoxCollider(new Vector3f(0.475f, 0.975f, 0.475f));
 		
 //		capsule.setMassProps(2.5f, new Vector3f(0, 0, 0));
 		box.setMassProps(2.5f);

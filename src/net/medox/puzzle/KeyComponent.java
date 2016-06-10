@@ -2,7 +2,7 @@ package net.medox.puzzle;
 
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.math.Vector3f;
-import net.medox.neonengine.physics.Box;
+import net.medox.neonengine.physics.BoxCollider;
 import net.medox.neonengine.physics.CharacterController;
 import net.medox.neonengine.physics.PhysicsEngine;
 
@@ -12,7 +12,7 @@ public class KeyComponent extends EntityComponent{
 	private boolean grabbed;
 	
 	public KeyComponent(){
-		Box box = new Box(new Vector3f(0.125f, 0.125f, 0.125f));
+		BoxCollider box = new BoxCollider(new Vector3f(0.125f, 0.125f, 0.125f));
 		
 		box.setMassProps(0.5f);
 		

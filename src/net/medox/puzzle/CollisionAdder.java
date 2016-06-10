@@ -8,7 +8,7 @@ import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Transform;
 import net.medox.neonengine.core.Util;
 import net.medox.neonengine.math.Vector3f;
-import net.medox.neonengine.physics.Box;
+import net.medox.neonengine.physics.BoxCollider;
 
 public class CollisionAdder{
 	public static void load(String file, Entity e, Vector3f pos){
@@ -35,7 +35,7 @@ public class CollisionAdder{
 	}
 	
 	public static void addCollision(float x, float y, float z, float width, float height, float lenght, Entity e){
-		Box box = new Box(new Vector3f(0.5f, 0.5f, 0.5f));
+		BoxCollider box = new BoxCollider(new Vector3f(0.5f, 0.5f, 0.5f));
 		box.setMassProps(0);
 		
 		Transform t = new Transform();
