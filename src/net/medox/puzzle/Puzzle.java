@@ -170,6 +170,13 @@ public class Puzzle extends Game{
 		}
 		addEntity(world);
 		
+		Entity key2d = new Entity();
+		Material blueKeyMatteriald = new Material();
+		blueKeyMatteriald.setDiffuseMap(new Texture("stallTexture.png"));
+		key2d.addComponent(new MeshRenderer(new Mesh("stall.obj"), blueKeyMatteriald));
+		key2d.getTransform().setPos(10, 5, 10);
+		addEntity(key2d);
+		
 		Entity2D crosshair = new Entity2D();
 		MeshRenderer2D crosshairRenderer = new MeshRenderer2D(new Texture("crosshair.png", true));
 		Lock2D crosshairLock = new Lock2D(-8, -8, new Vector2f(0.5f, 0.5f));
