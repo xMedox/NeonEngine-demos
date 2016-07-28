@@ -8,17 +8,17 @@ import net.medox.neonengine.components.MeshRenderer;
 import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Game;
+import net.medox.neonengine.lighting.Attenuation;
+import net.medox.neonengine.lighting.DirectionalLight;
+import net.medox.neonengine.lighting.PointLight;
+import net.medox.neonengine.lighting.SpotLight;
 import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector3f;
-import net.medox.neonengine.rendering.Attenuation;
-import net.medox.neonengine.rendering.DirectionalLight;
 import net.medox.neonengine.rendering.Font;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
-import net.medox.neonengine.rendering.PointLight;
 import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Skybox;
-import net.medox.neonengine.rendering.SpotLight;
 import net.medox.neonengine.rendering.Texture;
 
 public class TestGame extends Game{

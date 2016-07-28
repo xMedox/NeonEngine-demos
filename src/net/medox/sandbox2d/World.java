@@ -19,7 +19,7 @@ public class World extends Entity2DComponent{
 	public World(){
 		blocks = new Block[worldWidth][worldHeight];
 		
-		if(!Util.fileExists("Blocks.txt")){
+		if(!Util.doesFileExist("Blocks.txt")){
 			for(int x = 0; x < worldWidth; x++){
 				for(int y = 0; y < worldHeight; y++){
 					Transform2D transform = new Transform2D();

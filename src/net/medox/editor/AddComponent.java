@@ -4,9 +4,9 @@ import net.medox.neonengine.components.MeshRenderer;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.core.Input;
+import net.medox.neonengine.lighting.DirectionalLight;
 import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector3f;
-import net.medox.neonengine.rendering.DirectionalLight;
 import net.medox.neonengine.rendering.Material;
 import net.medox.neonengine.rendering.Mesh;
 
