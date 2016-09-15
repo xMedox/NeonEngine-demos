@@ -74,7 +74,7 @@ public class AddComponent extends EntityComponent{
 			sphere.setMassProps(4);
 			
 			sphere.setTransform(sphereTransform);
-			
+						
 			getParent().addChild(entity.addComponent(new PhysicsComponent(sphere)).addComponent(new MeshRenderer(sphereM, bricks))/*.addComponent(new PointLight(new Vector3f(new Random().nextFloat(), new Random().nextFloat(), new Random().nextFloat()), 3f, new Attenuation(0, 0, 1)))*/);
 		}
 		
