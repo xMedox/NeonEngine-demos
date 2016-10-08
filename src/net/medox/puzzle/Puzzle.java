@@ -25,25 +25,27 @@ import net.medox.neonengine.rendering.Window;
 
 public class Puzzle extends Game{
 	public static void main(String[] args){
-//		NeonEngine.OPTION_ENABLE_VSYNC = 0;
-//		NeonEngine.OPTION_ENABLE_FXAA = 0;
-//		NeonEngine.OPTION_ENABLE_SHADOWS = 1;
-//		NeonEngine.OPTION_ENABLE_2D = 1;
-//		NeonEngine.OPTION_ENABLE_PARTICLES = 0;
-//		NeonEngine.OPTION_ENABLE_BLOOM = 1;
-//		NeonEngine.OPTION_TEXTURE_QUALITY = 0;
-//		NeonEngine.OPTION_SHADOW_QUALITY = 0;
+//		NeonEngine.enableProfiling(true);
+//		NeonEngine.enableVSync(false);
+//		NeonEngine.enableFXAA(false);
+//		NeonEngine.enableShadows(true);
+//		NeonEngine.enable2D(true);
+//		NeonEngine.enableParticles(false);
+//		NeonEngine.enableBloom(true);
+//		NeonEngine.setTextureQuality(0);
+//		NeonEngine.setShadowQuality(0);
 //		
 //		NeonEngine.init(new Puzzle(), /*60*/1000);
 		
-		NeonEngine.OPTION_ENABLE_VSYNC = 1;
-		NeonEngine.OPTION_ENABLE_FXAA = 0;
-		NeonEngine.OPTION_ENABLE_SHADOWS = 1;
-		NeonEngine.OPTION_ENABLE_2D = 1;
-		NeonEngine.OPTION_ENABLE_PARTICLES = 0;
-		NeonEngine.OPTION_ENABLE_BLOOM = 1;
-		NeonEngine.OPTION_TEXTURE_QUALITY = 0;
-		NeonEngine.OPTION_SHADOW_QUALITY = 0;
+		NeonEngine.enableProfiling(true);
+		NeonEngine.enableVSync(true);
+		NeonEngine.enableFXAA(false);
+		NeonEngine.enableShadows(true);
+		NeonEngine.enable2D(true);
+		NeonEngine.enableParticles(false);
+		NeonEngine.enableBloom(true);
+		NeonEngine.setTextureQuality(0);
+		NeonEngine.setShadowQuality(0);
 		
 		NeonEngine.init(new Puzzle(), 60);
 		
@@ -61,6 +63,12 @@ public class Puzzle extends Game{
 	
 	@Override
 	public void init(){
+		super.init();
+//		RenderingEngine.addFilter(new Shader("filterInvert"));
+//		RenderingEngine.addFilter(new Shader("filterBits"));
+//		RenderingEngine.addFilter(new Shader("filterGrey"));
+//		RenderingEngine.addFilter(new Shader("filterFlip"));
+		
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
 		RenderingEngine.setMainSkybox(new Skybox("skyTest.png", "skyTest.png", "skyTopTest.png", "skyBottomTest.png", "skyTest.png", "skyTest.png"));
 		
