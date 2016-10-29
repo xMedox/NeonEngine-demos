@@ -100,25 +100,27 @@ public class PlayerComponent extends EntityComponent{
 				
 				Ray ray = new Ray(camera.getTransform().getTransformedPos(), camera.getTransform().getTransformedPos().add(camera.getTransform().getRot().getForward().mul(3)));
 				
-				if(ray.getHitCollider().getGroup() == 1){
-					WolfComponent wolf = (WolfComponent)ray.getHitCollider().getObject();
-					if(!wolf.isDead()){
-						int r = Util.randomInt(0, 2);
-						
-						Texture t = null;
-						
-						if(r == 0){
-							t = t1;
-						}else if(r == 1){
-							t = t2;
-						}else if(r == 2){
-							t = t3;
+				if(ray.hasHit()){
+					if(ray.getHitCollider().getGroup() == 1){
+						WolfComponent wolf = (WolfComponent)ray.getHitCollider().getObject();
+						if(!wolf.isDead()){
+							int r = Util.randomInt(0, 2);
+							
+							Texture t = null;
+							
+							if(r == 0){
+								t = t1;
+							}else if(r == 1){
+								t = t2;
+							}else if(r == 2){
+								t = t3;
+							}
+							
+							wolf.getMeshRenderer().setDiffuseMap(t);
+							wolf.getMeshRenderer().setEmissiveMap(g);
+							
+							wolf.damage(1);
 						}
-						
-						wolf.getMeshRenderer().setDiffuseMap(t);
-						wolf.getMeshRenderer().setEmissiveMap(g);
-						
-						wolf.damage(1);
 					}
 				}
 			}

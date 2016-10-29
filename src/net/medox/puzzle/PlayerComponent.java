@@ -259,22 +259,26 @@ public class PlayerComponent extends EntityComponent{
 				
 				Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(8)));
 				
-				if(ray.hasHit() && ray.getHitCollider().getGroup() == 0 && ray.getHitNormal().getY() >= 0.5f){
-					Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, -0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, 0.5f)));
-					
-					if(!ray1.hasHit()){
-						Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, -0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, 0.5f)));
+				if(ray.hasHit()){
+					if(ray.getHitCollider().getGroup() == 0 && ray.getHitNormal().getY() >= 0.5f){
+						Ray ray1 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, -0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, 0.5f)));
 						
-						if(!ray2.hasHit()){
-							Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, 0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, -0.5f)));
+						if(!ray1.hasHit()){
+							Ray ray2 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, -0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, 0.5f)));
 							
-							if(!ray3.hasHit()){
-								Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, 0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, -0.5f)));
+							if(!ray2.hasHit()){
+								Ray ray3 = new Ray(ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, 0.5f)), ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, -0.5f)));
 								
-								if(!ray4.hasHit()){
-									creatable = true;
+								if(!ray3.hasHit()){
+									Ray ray4 = new Ray(ray.getHitPoint().add(new Vector3f(-0.5f, 0.25f, 0.5f)), ray.getHitPoint().add(new Vector3f(0.5f, 0.25f, -0.5f)));
 									
-									shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+									if(!ray4.hasHit()){
+										creatable = true;
+										
+										shadowShow.getTransform().setPos(ray.getHitPoint().add(new Vector3f(0, 1, 0)));
+									}else{
+										shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
+									}
 								}else{
 									shadowShow.getTransform().setPos(new Vector3f(0, -100000, 0));
 								}
@@ -324,15 +328,17 @@ public class PlayerComponent extends EntityComponent{
 		if(Input.getKeyDown(Input.KEY_E) && !carrying){
 			Ray ray = new Ray(getTransform().getTransformedPos(), getTransform().getTransformedPos().add(getTransform().getRot().getForward().mul(3)));
 			
-			if(ray.hasHit() && ray.getHitCollider().getGroup() == 1){
-				key = (KeyComponent)ray.getHitCollider().getObject();
-				
-				key.getTransform().setRot(key.getController().getRot());
-				
-				key.remove();
-				
-				carrying = true;
-				carryChanged = true;
+			if(ray.hasHit()){
+				if(ray.getHitCollider().getGroup() == 1){
+					key = (KeyComponent)ray.getHitCollider().getObject();
+					
+					key.getTransform().setRot(key.getController().getRot());
+					
+					key.remove();
+					
+					carrying = true;
+					carryChanged = true;
+				}
 			}
 		}
 		
