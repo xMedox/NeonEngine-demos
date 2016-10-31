@@ -1,7 +1,7 @@
 package net.medox.puzzle;
 
 import net.medox.neonengine.audio.Sound;
-import net.medox.neonengine.components.Progressbar;
+import net.medox.neonengine.components2D.Progressbar;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.EntityComponent;

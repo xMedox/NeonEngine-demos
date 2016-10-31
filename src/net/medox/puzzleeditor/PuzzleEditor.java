@@ -2,8 +2,8 @@ package net.medox.puzzleeditor;
 
 import net.medox.neonengine.components.FreeLook;
 import net.medox.neonengine.components.FullscreenSetter;
-import net.medox.neonengine.components.Lock2D;
 import net.medox.neonengine.components.ScreenshotTaker;
+import net.medox.neonengine.components2D.Lock2D;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;

@@ -2,10 +2,10 @@ package net.medox.puzzle;
 
 import net.medox.neonengine.audio.Listener;
 import net.medox.neonengine.components.FullscreenSetter;
-import net.medox.neonengine.components.Lock2D;
 import net.medox.neonengine.components.MeshRenderer;
-import net.medox.neonengine.components.MeshRenderer2D;
 import net.medox.neonengine.components.ScreenshotTaker;
+import net.medox.neonengine.components2D.Lock2D;
+import net.medox.neonengine.components2D.MeshRenderer2D;
 import net.medox.neonengine.core.Entity;
 import net.medox.neonengine.core.Entity2D;
 import net.medox.neonengine.core.Game;
