@@ -42,6 +42,16 @@ import net.medox.neonengine.rendering.Window;
 
 public class TestGame extends Game{
 	public static void main(String[] args){
+		NeonEngine.enableProfiling(true);
+		NeonEngine.enableVSync(true);
+		NeonEngine.enableFXAA(true);
+		NeonEngine.enableShadows(true);
+		NeonEngine.enable2D(true);
+		NeonEngine.enableParticles(true);
+		NeonEngine.enableBloom(true);
+		NeonEngine.setTextureQuality(0);
+		NeonEngine.setShadowQuality(0);
+		
 		NeonEngine.init(new TestGame(), /*600*/60);
 		
 		Window.setStartTitle("Project Knight");
@@ -84,6 +94,12 @@ public class TestGame extends Game{
 	
 	@Override
 	public void init(){
+		super.init();
+//		RenderingEngine.addFilter(new Shader("filterInvert"));
+//		RenderingEngine.addFilter(new Shader("filterBits"));
+//		RenderingEngine.addFilter(new Shader("filterGrey"));
+//		RenderingEngine.addFilter(new Shader("filterFlip"));
+		
 		RenderingEngine.setMainFont(new Font("font.ttf", 16, false));
 		RenderingEngine.setMainSkybox(new Skybox("right.png", "left.png", "top.png", "bottom.png", "front.png", "back.png"));
 		
@@ -498,12 +514,9 @@ public class TestGame extends Game{
 		
 		box1.setPos(stair1.getTransform().getTransformedPos());
 		
-		box1.setMassProps(0, new Vector3f(0, 0, 0));
-		
-		PhysicsComponent phy1 = new PhysicsComponent(box1);
-		
-		stair1.addComponent(phy1);
-		stair1.addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
+		box1.setMassProps(0);
+				
+		stair1.addComponent(new StaticPhysicsComponent(box1)).addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
 		
 		addEntity(stair1);
 		
@@ -517,12 +530,9 @@ public class TestGame extends Game{
 		
 		box2.setPos(stair2.getTransform().getTransformedPos());
 		
-		box2.setMassProps(0, new Vector3f(0, 0, 0));
+		box2.setMassProps(0);
 		
-		PhysicsComponent phy2 = new PhysicsComponent(box2);
-		
-		stair2.addComponent(phy2);
-		stair2.addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
+		stair2.addComponent(new StaticPhysicsComponent(box2)).addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
 		
 		addEntity(stair2);
 		
@@ -536,12 +546,9 @@ public class TestGame extends Game{
 		
 		box3.setPos(stair3.getTransform().getTransformedPos());
 		
-		box3.setMassProps(0, new Vector3f(0, 0, 0));
-		
-		PhysicsComponent phy3 = new PhysicsComponent(box3);
-		
-		stair3.addComponent(phy3);
-		stair3.addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
+		box3.setMassProps(0);
+				
+		stair3.addComponent(new StaticPhysicsComponent(box3)).addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
 		
 		addEntity(stair3);
 		
@@ -555,12 +562,9 @@ public class TestGame extends Game{
 		
 		box4.setPos(stair4.getTransform().getTransformedPos());
 		
-		box4.setMassProps(0, new Vector3f(0, 0, 0));
-		
-		PhysicsComponent phy4 = new PhysicsComponent(box4);
-		
-		stair4.addComponent(phy4);
-		stair4.addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
+		box4.setMassProps(0);
+				
+		stair4.addComponent(new StaticPhysicsComponent(box4)).addComponent(new MeshRenderer(new Mesh("crate 2 b.obj"), bricks));
 		
 		addEntity(stair4);
 		
@@ -575,8 +579,7 @@ public class TestGame extends Game{
 //		MeshRenderer2D c = new MeshRenderer2D(new Texture("testeroonie2.jpg"));
 		MeshRenderer2D c = new MeshRenderer2D(new Texture("testeroonie2.png", true));
 		Lock2D l = new Lock2D(-16/2, -16/2, new Vector2f(0.5f, 0.5f));
-		e.addComponent(c);
-		e.addComponent(l);
+		e.addComponent(c).addComponent(l);
 		
 		e.getTransform().setPos(new Vector2f(Window.getWidth()/2-16/2, Window.getHeight()/2-16/2));
 		e.getTransform().setScale(new Vector2f(16, 16));
@@ -613,11 +616,10 @@ public class TestGame extends Game{
 //		MeshRenderer2D c2 = new MeshRenderer2D(new Texture("Medox 5.png", GL11.GL_TEXTURE_2D, GL11.GL_NEAREST));
 		Lock2D l22 = new Lock2D(-256, -40-29, new Vector2f(1f, 1f));
 //		e2.addComponent(c2);
-		e22.addComponent(l22);
+		e22.addComponent(l22).addComponent(new TextBox(10));
 //		e2.addComponent(new Button());
 //		e2.addComponent(new Checkbox(false));
 //		e22.addComponent(new Progressbar(0));
-		e22.addComponent(new TextBox(10));
 		
 		e22.getTransform().setPos(new Vector2f(Window.getWidth()-256, Window.getHeight()-40-29));
 		e22.getTransform().setScale(new Vector2f(256, 29));
@@ -631,8 +633,7 @@ public class TestGame extends Game{
 //		MeshRenderer2D c3 = new MeshRenderer2D(new Texture("test_tl2.png", GL11.GL_TEXTURE_2D, GL11.GL_NEAREST));
 		MeshRenderer2D c3 = new MeshRenderer2D(new Texture("Medox 5.png", true));
 		Lock2D l3 = new Lock2D(0, 0, new Vector2f(0f, 0f));
-		e3.addComponent(c3);
-		e3.addComponent(l3);
+		e3.addComponent(c3).addComponent(l3);
 		
 		e3.getTransform().setPos(new Vector2f(0, 0));
 		e3.getTransform().setScale(new Vector2f(256, 256));
@@ -652,10 +653,9 @@ public class TestGame extends Game{
 //		MeshRenderer2D c2 = new MeshRenderer2D(new Texture("Medox 5.png", GL11.GL_TEXTURE_2D, GL11.GL_NEAREST));
 		Lock2D l10 = new Lock2D(0, -40, new Vector2f(0f, 1f));
 //		e2.addComponent(c2);
-		e10.addComponent(l10);
+		e10.addComponent(l10).addComponent(s1);
 //		e2.addComponent(new Button());
 //		e2.addComponent(new Checkbox(false));
-		e10.addComponent(s1);
 		
 		e10.getTransform().setPos(new Vector2f(0, Window.getHeight()-40));
 		e10.getTransform().setScale(new Vector2f(256, 40));
@@ -670,10 +670,9 @@ public class TestGame extends Game{
 //		MeshRenderer2D c2 = new MeshRenderer2D(new Texture("Medox 5.png", GL11.GL_TEXTURE_2D, GL11.GL_NEAREST));
 		Lock2D l11 = new Lock2D(0, -80, new Vector2f(0f, 1f));
 //		e2.addComponent(c2);
-		e11.addComponent(l11);
+		e11.addComponent(l11).addComponent(s2);
 //		e2.addComponent(new Button());
 //		e2.addComponent(new Checkbox(false));
-		e11.addComponent(s2);
 		
 		e11.getTransform().setPos(new Vector2f(0, Window.getHeight()-80));
 		e11.getTransform().setScale(new Vector2f(256, 40));
@@ -688,10 +687,9 @@ public class TestGame extends Game{
 //		MeshRenderer2D c2 = new MeshRenderer2D(new Texture("Medox 5.png", GL11.GL_TEXTURE_2D, GL11.GL_NEAREST));
 		Lock2D l12 = new Lock2D(0, -120, new Vector2f(0f, 1f));
 //		e2.addComponent(c2);
-		e12.addComponent(l12);
+		e12.addComponent(l12).addComponent(s3);
 //		e2.addComponent(new Button());
 //		e2.addComponent(new Checkbox(false));
-		e12.addComponent(s3);
 		
 		e12.getTransform().setPos(new Vector2f(0, Window.getHeight()-120));
 		e12.getTransform().setScale(new Vector2f(256, 40));
@@ -731,8 +729,7 @@ public class TestGame extends Game{
 		
 		Entity particle2 = new Entity();
 		
-		particle2.addComponent(new SmokeComponent());
-		particle2.addComponent(new SmokeComponent());
+		particle2.addComponent(new SmokeComponent()).addComponent(new SmokeComponent());
 		
 //		particle2.getTransform().setPos(new Vector3f(0, 0.5f, 0));
 		
