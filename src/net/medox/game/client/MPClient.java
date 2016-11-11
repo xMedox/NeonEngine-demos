@@ -13,6 +13,7 @@ import net.medox.neonengine.core.NeonEngine;
 import net.medox.neonengine.math.Matrix4f;
 import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector3f;
+import net.medox.neonengine.rendering.Cursor;
 import net.medox.neonengine.rendering.Window;
 
 import com.esotericsoftware.kryo.Kryo;
@@ -61,7 +62,7 @@ public class MPClient{
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("icon_16.png", "icon_32.png");
-		Window.setStartCursor("cursor.png", 0, 0);
+		Window.setStartCursor(new Cursor("cursor.png", 0, 0));
 		
 //		Log.info("Please enter your Username");
 //		name = scanner.nextLine();

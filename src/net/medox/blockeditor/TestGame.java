@@ -14,6 +14,7 @@ import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector2f;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.rendering.Camera;
+import net.medox.neonengine.rendering.Cursor;
 import net.medox.neonengine.rendering.Font;
 import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Skybox;
@@ -39,7 +40,7 @@ public class TestGame extends Game{
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("icon16.png", "icon32.png");
-		Window.setStartCursor("cursor test red.png", 0, 0);
+		Window.setStartCursor(new Cursor("cursor test red.png", 0, 0));
 		
 		NeonEngine.createWindow();
 		

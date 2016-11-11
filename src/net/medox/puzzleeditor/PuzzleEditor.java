@@ -13,6 +13,7 @@ import net.medox.neonengine.math.Quaternion;
 import net.medox.neonengine.math.Vector2f;
 import net.medox.neonengine.math.Vector3f;
 import net.medox.neonengine.rendering.Camera;
+import net.medox.neonengine.rendering.Cursor;
 import net.medox.neonengine.rendering.Font;
 import net.medox.neonengine.rendering.RenderingEngine;
 import net.medox.neonengine.rendering.Skybox;
@@ -38,7 +39,7 @@ public class PuzzleEditor extends Game{
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("iconShadow16.png", "iconShadow32.png");
-		Window.setStartCursor("cursor test.png", 0, 0);
+		Window.setStartCursor(new Cursor("cursor test.png", 0, 0));
 		
 		NeonEngine.createWindow();
 		
