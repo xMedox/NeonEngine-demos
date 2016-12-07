@@ -37,7 +37,7 @@ public class Sandbox2D extends Game{
 		NeonEngine.init(new Sandbox2D(), 60);
 		
 		Window.setStartTitle("Sandbox 2D");
-		Window.setStartDimensions(World.worldWidth*World.blockSize, World.worldHeight*World.blockSize);
+		Window.setStartSize(World.worldWidth*World.blockSize, World.worldHeight*World.blockSize);
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(false);
 		Window.setStartIcon("icon16.png", "icon32.png");

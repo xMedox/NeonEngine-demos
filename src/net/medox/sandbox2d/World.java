@@ -75,7 +75,7 @@ public class World extends Entity2DComponent{
 			}
 		}
 		
-		RenderingEngine.drawString(10, 10, "OpenGL", new Vector3f(1, 1, 1));
+		RenderingEngine.drawString(10, 5, "OpenGL", new Vector3f(1, 1, 1));
 	}
 	
 	@Override

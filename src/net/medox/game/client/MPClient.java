@@ -58,7 +58,7 @@ public class MPClient{
 		NeonEngine.init(game, 60);
 		
 		Window.setStartTitle("Project Guns");
-		Window.setStartDimensions(854, 480);
+		Window.setStartSize(854, 480);
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("icon_16.png", "icon_32.png");

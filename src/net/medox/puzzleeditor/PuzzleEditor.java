@@ -35,7 +35,7 @@ public class PuzzleEditor extends Game{
 		NeonEngine.init(new PuzzleEditor(), 60);
 		
 		Window.setStartTitle("Puzzle Editor");
-		Window.setStartDimensions(854, 480);
+		Window.setStartSize(854, 480);
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("iconShadow16.png", "iconShadow32.png");

@@ -51,7 +51,7 @@ public class Puzzle extends Game{
 		NeonEngine.init(new Puzzle(), 60);
 		
 		Window.setStartTitle("Shadow Puzzle");
-		Window.setStartDimensions(854, 480);
+		Window.setStartSize(854, 480);
 		Window.setStartFullscreen(false);
 		Window.setStartResizable(true);
 		Window.setStartIcon("iconShadow16.png", "iconShadow32.png");
