@@ -45,7 +45,7 @@ public class CollisionObject{
 	}
 	
 	public void render(Shader shader, Camera camera){
-		if(mesh.inFrustum(transform, camera)){
+		if(RenderingEngine.meshInFrustum(transform, mesh, camera)){
 			RenderingEngine.renderMesh(shader, transform, mesh, material, camera);
 		}
 	}

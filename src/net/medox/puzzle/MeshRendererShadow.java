@@ -19,7 +19,7 @@ public class MeshRendererShadow extends EntityComponent{
 	@Override
 	public void render(Shader shader, Camera camera){
 		if(RenderingEngine.getRenderingState() != RenderingEngine.SHADOW_STATE && RenderingEngine.getRenderingState() != RenderingEngine.LIGHTING_STATE){
-			if(mesh.inFrustum(getTransform(), camera)){
+			if(RenderingEngine.meshInFrustum(getTransform(), mesh, camera)){
 				RenderingEngine.renderMesh(shader, getTransform(), mesh, material, camera);
 			}
 		}

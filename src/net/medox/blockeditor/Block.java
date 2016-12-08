@@ -127,7 +127,7 @@ public class Block{
 	
 	public void render(Shader shader, Camera camera){
 		if(texture[0] != -1){
-			if(mesh.inFrustum(transform, camera)){
+			if(RenderingEngine.meshInFrustum(transform, mesh, camera)){
 				if(seleted){
 					RenderingEngine.renderMesh(shader, transform, mesh, materialS, camera);
 				}else{
@@ -135,7 +135,7 @@ public class Block{
 				}
 			}
 		}else if(seleted){
-			if(mesh.inFrustum(transform, camera)){
+			if(RenderingEngine.meshInFrustum(transform, mesh, camera)){
 				RenderingEngine.renderMesh(shader, transform, mesh, materialS, camera);
 			}
 		}
