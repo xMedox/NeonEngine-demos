@@ -21,6 +21,7 @@ public class Sandbox2D extends Game{
 //		NeonEngine.enableBloom(false);
 //		NeonEngine.setTextureQuality(0);
 //		NeonEngine.setShadowQuality(0);
+//		NeonEngine.setRenderQuality(1);
 //		
 //		NeonEngine.init(new Sandbox2D(), /*60*/1000);
 		
@@ -33,6 +34,7 @@ public class Sandbox2D extends Game{
 		NeonEngine.enableBloom(false);
 		NeonEngine.setTextureQuality(0);
 		NeonEngine.setShadowQuality(0);
+		NeonEngine.setRenderQuality(1);
 		
 		NeonEngine.init(new Sandbox2D(), 60);
 		
