@@ -1,8 +1,8 @@
 package net.medox.block;
 
 import net.medox.neonengine.audio.Listener;
-import net.medox.neonengine.components.FreeLook;
 import net.medox.neonengine.components.FullscreenSetter;
+import net.medox.neonengine.components.LookComponent;
 import net.medox.neonengine.components.MeshRenderer;
 import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.components2D.Lock2D;
@@ -116,7 +116,7 @@ public class TestGame extends Game{
 		playerHead.getTransform().setPos(0, /*0.75f*//*0.0125f*/0.7375f, 0);
 		Camera cam = new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f);
 		playerHead.addComponent(cam);
-		FreeLook look = new FreeLook(0.15f);
+		LookComponent look = new LookComponent(0.15f);
 		playerHead.addComponent(look);
 		PlayerComponent p = new PlayerComponent(cam);
 //		p.getCapsule().setTransform(player.getTransform());
@@ -191,8 +191,8 @@ public class TestGame extends Game{
 		
 //		Entity camera = new Entity();
 //		camera.addComponent(new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f));
-//		camera.addComponent(new FreeLook(0.15f));
-//		camera.addComponent(new FreeMove(10.0f));
+//		camera.addComponent(new LookComponent(0.15f));
+//		camera.addComponent(new MoveComponent(10.0f));
 //		addEntity(camera);
 		
 		Entity wolf = new Entity();

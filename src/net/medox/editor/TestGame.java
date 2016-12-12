@@ -1,8 +1,8 @@
 package net.medox.editor;
 
 import net.medox.neonengine.audio.Listener;
-import net.medox.neonengine.components.FreeLook;
-import net.medox.neonengine.components.FreeMove;
+import net.medox.neonengine.components.LookComponent;
+import net.medox.neonengine.components.MoveComponent;
 import net.medox.neonengine.components2D.Lock2D;
 import net.medox.neonengine.components2D.MeshRenderer2D;
 import net.medox.neonengine.core.Entity;
@@ -52,8 +52,8 @@ public class TestGame extends Game{
 		Entity player = new Entity();
 				
 		player.addComponent(new Camera((float)Math.toRadians(65.0f), 0.01f, 1000.0f));
-		player.addComponent(new FreeLook(0.15f));
-		player.addComponent(new FreeMove(5));
+		player.addComponent(new LookComponent(0.15f));
+		player.addComponent(new MoveComponent(5));
 		player.addComponent(new Listener());
 		
 		addEntity(player);

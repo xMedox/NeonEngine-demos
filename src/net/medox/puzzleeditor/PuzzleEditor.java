@@ -1,7 +1,7 @@
 package net.medox.puzzleeditor;
 
-import net.medox.neonengine.components.FreeLook;
 import net.medox.neonengine.components.FullscreenSetter;
+import net.medox.neonengine.components.LookComponent;
 import net.medox.neonengine.components.ScreenshotTaker;
 import net.medox.neonengine.components2D.Lock2D;
 import net.medox.neonengine.core.Entity;
@@ -66,7 +66,7 @@ public class PuzzleEditor extends Game{
 		
 		Entity camera = new Entity();
 		camera.addComponent(new Camera((float)Math.toRadians(65.0f), 0.01f, 400.0f));
-		camera.addComponent(new FreeLook(0.15f));
+		camera.addComponent(new LookComponent(0.15f));
 		camera.addComponent(new FreeFly(10.0f));
 		addEntity(camera);
 		
