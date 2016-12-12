@@ -1,4 +1,5 @@
 package net.medox.block;
+
 import net.medox.neonengine.components.LookComponent;
 import net.medox.neonengine.core.EntityComponent;
 import net.medox.neonengine.math.Quaternion;
